@@ -1,6 +1,7 @@
 package com.lcy.campusmall.controller;
 
 import com.lcy.campusmall.common.ApiRestResponse;
+import com.lcy.campusmall.common.Constant;
 import com.lcy.campusmall.exception.MallException;
 import com.lcy.campusmall.exception.MallExceptionEnum;
 import com.lcy.campusmall.model.pojo.User;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -40,5 +43,25 @@ public class UserController {
         }
         userService.register(userName, password);
         return ApiRestResponse.success();
+    }
+    /**
+     * 登录
+     */
+    @PostMapping("/login")
+    @ResponseBody
+    public ApiRestResponse login(@RequestParam("userName") String userName,
+                                 @RequestParam("password") String password, HttpSession session)
+            throws MallException {
+        if (StringUtils.isEmpty(userName)) {
+            return ApiRestResponse.error(MallExceptionEnum.NEED_USER_NAME);
+        }
+        if (StringUtils.isEmpty(password)) {
+            return ApiRestResponse.error(MallExceptionEnum.NEED_PASSWORD);
+        }
+        User user = userService.login(userName, password);
+        //返回用户信息时，不返回密码
+        user.setPassword(null);
+        session.setAttribute(Constant.CAMPUS_MALL_USER, user);
+        return ApiRestResponse.success(user);
     }
 }

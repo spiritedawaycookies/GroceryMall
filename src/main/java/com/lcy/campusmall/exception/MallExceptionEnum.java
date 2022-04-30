@@ -16,7 +16,7 @@ public enum MallExceptionEnum {
 
     INSERT_FAILED(10005, "Insert failed, please try again"),
 
-    WRONG_PASSWORD(10006, "Password error"),
+    WRONG_PASSWORD(10006, "Cannot find user or username and password error"),
 
     NEED_LOGIN(10007, "User not logged in"),
 

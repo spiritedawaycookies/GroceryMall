@@ -1,5 +1,6 @@
 package com.lcy.campusmall.service.impl;
 
+import com.lcy.campusmall.common.Constant;
 import com.lcy.campusmall.exception.MallException;
 import com.lcy.campusmall.exception.MallExceptionEnum;
 import com.lcy.campusmall.model.dao.UserMapper;
@@ -35,11 +36,23 @@ public class UserServiceImpl implements UserService {
         int salt = new Random().nextInt(1000) + 1000; //盐值
         user.setSalt(salt);
 
-        user.setPassword(MD5Utils.md5Digest(password, salt,2));
+        user.setPassword(MD5Utils.md5Digest(password, salt, Constant.SALT_ROUND));
 
         int count = userMapper.insertSelective(user);
         if (count == 0) {
             throw new MallException(MallExceptionEnum.INSERT_FAILED);
         }
+    }
+
+    public User login(String userName, String password) throws MallException {
+        String md5Password = null;
+        Integer salt = userMapper.selectByName(userName).getSalt();
+        md5Password = MD5Utils.md5Digest(password, salt, Constant.SALT_ROUND);
+
+        User user = userMapper.selectLogin(userName, md5Password);
+        if (user == null) {
+            throw new MallException(MallExceptionEnum.WRONG_PASSWORD);
+        }
+        return user;
     }
 }
