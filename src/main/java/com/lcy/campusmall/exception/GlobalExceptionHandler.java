@@ -39,28 +39,28 @@ public class GlobalExceptionHandler {
         return ApiRestResponse.error(e.getCode(), e.getMessage());
     }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    @ResponseBody
-//    public ApiRestResponse handleMethodArgumentNotValidException(
-//            MethodArgumentNotValidException e) {
-//        log.error("MethodArgumentNotValidException: ", e);
-//        return handleBindingResult(e.getBindingResult());
-//    }
-//
-//    private ApiRestResponse handleBindingResult(BindingResult result) {
-//        //把异常处理为对外暴露的提示
-//        List<String> list = new ArrayList<>();
-//        if (result.hasErrors()) {
-//            List<ObjectError> allErrors = result.getAllErrors();
-//            for (ObjectError objectError : allErrors) {
-//                String message = objectError.getDefaultMessage();
-//                list.add(message);
-//            }
-//        }
-//        if (list.size() == 0) {
-//            return ApiRestResponse.error(MallExceptionEnum.REQUEST_PARAM_ERROR);
-//        }
-//        return ApiRestResponse
-//                .error(MallExceptionEnum.REQUEST_PARAM_ERROR.getCode(), list.toString());
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
+    public ApiRestResponse handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException e) {
+        log.error("MethodArgumentNotValidException: ", e);
+        return handleBindingResult(e.getBindingResult());
+    }
+
+    private ApiRestResponse handleBindingResult(BindingResult result) {
+        //把异常处理为对外暴露的提示
+        List<String> list = new ArrayList<>();
+        if (result.hasErrors()) {
+            List<ObjectError> allErrors = result.getAllErrors();
+            for (ObjectError objectError : allErrors) {
+                String message = objectError.getDefaultMessage();
+                list.add(message);
+            }
+        }
+        if (list.size() == 0) {
+            return ApiRestResponse.error(MallExceptionEnum.REQUEST_PARAM_ERROR);
+        }
+        return ApiRestResponse
+                .error(MallExceptionEnum.REQUEST_PARAM_ERROR.getCode(), list.toString());
+    }
 }

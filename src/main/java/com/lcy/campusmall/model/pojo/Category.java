@@ -1,7 +1,7 @@
 package com.lcy.campusmall.model.pojo;
 
 import java.util.Date;
-
+//plain ordinary  java object
 public class Category {
     private Integer id;
 

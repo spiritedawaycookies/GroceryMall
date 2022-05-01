@@ -55,4 +55,9 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+    @Override
+    public boolean checkAdminRole(User user) {
+        //1是普通用户，2是管理员
+        return user.getRole().equals(2);
+    }
 }
