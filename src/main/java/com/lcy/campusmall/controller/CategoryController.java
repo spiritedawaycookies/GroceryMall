@@ -6,6 +6,7 @@ import com.lcy.campusmall.common.Constant;
 import com.lcy.campusmall.exception.MallExceptionEnum;
 import com.lcy.campusmall.model.pojo.User;
 import com.lcy.campusmall.model.request.AddCategoryReq;
+import com.lcy.campusmall.model.vo.CategoryVO;
 import com.lcy.campusmall.service.CategoryService;
 import com.lcy.campusmall.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class CategoryController {
@@ -65,12 +67,19 @@ public class CategoryController {
         return ApiRestResponse.success();
     }
 
-    @Operation(summary = "后台目录列表(分页)")
+    @Operation(summary = "后台目录列表(分页)",description = "给管理员看")
     @GetMapping("admin/category/list")
     @ResponseBody
     public ApiRestResponse listCategoryForAdmin(@RequestParam Integer pageNum,
                                                 @RequestParam Integer pageSize) {
         PageInfo pageInfo = categoryService.listForAdmin(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);
+    }
+    @Operation(summary = "前台目录列表",description = "递归,给用户看")
+    @GetMapping("category/list")
+    @ResponseBody
+    public ApiRestResponse listCategoryForCustomer() {
+        List<CategoryVO> categoryVOS = categoryService.listCategoryForCustomer(0);
+        return ApiRestResponse.success(categoryVOS);
     }
 }
