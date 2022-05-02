@@ -6,4 +6,5 @@ public interface CategoryService {
     void add(AddCategoryReq addCategoryReq);
 
 
+    void delete(Integer id);
 }
