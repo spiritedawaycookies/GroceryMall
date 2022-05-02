@@ -36,7 +36,7 @@ public class CategoryController {
     })
     @PostMapping("admin/category/add")
     @ResponseBody
-    //@RequestBody从body里找参数
+    //@从Requestbody里找post参数
     public ApiRestResponse addCategory(HttpSession session,
                                        @Valid @RequestBody AddCategoryReq addCategoryReq) {
         User currentUser = (User) session.getAttribute(Constant.CAMPUS_MALL_USER);
@@ -44,13 +44,18 @@ public class CategoryController {
             return ApiRestResponse.error(MallExceptionEnum.NEED_LOGIN);
         }
         //校验是否是管理员
-        boolean adminRole = userService.checkAdminRole(currentUser);
-        if (adminRole) {
-            //是管理员，执行操作
-            categoryService.add(addCategoryReq);
-            return ApiRestResponse.success();
-        } else {
-            return ApiRestResponse.error(MallExceptionEnum.NEED_ADMIN);
-        }
+        //如果每次都是重复写这些就很重复 所以干脆写进filter
+//        boolean adminRole = userService.checkAdminRole(currentUser);
+//        if (adminRole) {
+//            //是管理员，执行操作
+//            categoryService.add(addCategoryReq);
+//            return ApiRestResponse.success();
+//        } else {
+//            return ApiRestResponse.error(MallExceptionEnum.NEED_ADMIN);
+//        }
+        categoryService.add(addCategoryReq);
+        return ApiRestResponse.success();
     }
+
+
 }
