@@ -1,5 +1,6 @@
 package com.lcy.campusmall.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.lcy.campusmall.common.ApiRestResponse;
 import com.lcy.campusmall.common.Constant;
 import com.lcy.campusmall.exception.MallExceptionEnum;
@@ -64,5 +65,12 @@ public class CategoryController {
         return ApiRestResponse.success();
     }
 
-
+    @Operation(summary = "后台目录列表(分页)")
+    @GetMapping("admin/category/list")
+    @ResponseBody
+    public ApiRestResponse listCategoryForAdmin(@RequestParam Integer pageNum,
+                                                @RequestParam Integer pageSize) {
+        PageInfo pageInfo = categoryService.listForAdmin(pageNum, pageSize);
+        return ApiRestResponse.success(pageInfo);
+    }
 }
