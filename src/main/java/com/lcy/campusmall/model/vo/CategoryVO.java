@@ -1,8 +1,9 @@
 package com.lcy.campusmall.model.vo;
 
+import java.io.Serializable;
 import java.util.*;
 //给前台的view
-public class CategoryVO {
+public class CategoryVO implements Serializable {
     private Integer id;
 
     private String name;

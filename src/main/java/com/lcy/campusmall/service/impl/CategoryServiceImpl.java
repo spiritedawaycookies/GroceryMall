@@ -11,6 +11,7 @@ import com.lcy.campusmall.model.vo.CategoryVO;
 import com.lcy.campusmall.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -58,6 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
         return pageInfo;
     }
     @Override
+    @Cacheable(value="listCategoryForCustomer")
     public List<CategoryVO> listCategoryForCustomer(Integer parentId) {
         ArrayList<CategoryVO> categoryVOList = new ArrayList<>();
         recursivelyFindCategories(categoryVOList, parentId);
