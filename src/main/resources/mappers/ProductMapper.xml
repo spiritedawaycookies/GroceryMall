@@ -12,9 +12,10 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="sales" jdbcType="BIGINT" property="sales" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, `name`, image, detail, category_id, price, stock, `status`, create_time, update_time
+    id, `name`, image, detail, category_id, price, stock, `status`, create_time, update_time,sales
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -30,11 +31,11 @@
     insert into campus_mall_product (id, `name`, image, 
       detail, category_id, price, 
       stock, `status`, create_time, 
-      update_time)
+      update_time,sales)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{detail,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
       #{stock,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{updateTime,jdbcType=TIMESTAMP},#{sales,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.lcy.campusmall.model.pojo.Product">
     insert into campus_mall_product
@@ -69,6 +70,9 @@
       <if test="updateTime != null">
         update_time,
       </if>
+      <if test="sales != null">
+        sales,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -100,6 +104,9 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -133,6 +140,9 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="sales != null">
+        #{sales,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -146,7 +156,14 @@
       stock = #{stock,jdbcType=INTEGER},
       `status` = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+        sales=#{sales,jdbcType=BIGINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from campus_mall_product
+    where name = #{name,jdbcType = VARCHAR}
+  </select>
 </mapper>

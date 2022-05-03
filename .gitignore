@@ -64,4 +64,4 @@ build/
 *.properties
 **/lib/
 **/generatorConfig.xml
-
+product-images/

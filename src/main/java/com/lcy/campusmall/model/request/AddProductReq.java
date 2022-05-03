@@ -1,51 +1,36 @@
-package com.lcy.campusmall.model.pojo;
+package com.lcy.campusmall.model.request;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class Product {
-    private Integer id;
-
+public class AddProductReq {
+    @NotNull(message = "product name cannot be null ")
     private String name;
+    @NotNull(message = "product image cannot be null ")
 
     private String image;
 
     private String detail;
+    @NotNull(message = "product category cannot be null ")
 
     private Integer categoryId;
-
+    @NotNull(message = "product price cannot be null ")
+    @Min(value = 1, message = "cannot be less than 1 penny")
     private Integer price;
-
+    @NotNull(message = "product stock cannot be null ")
+    @Max(value = 10000, message = "stock cannot be greater than 10000")
     private Integer stock;
 
     private Integer status;
-
-    private Date createTime;
-
-    private Date updateTime;
-    private Long sales;
-
-    public Long getSales() {
-        return sales;
-    }
-
-    public void setSales(Long sales) {
-        this.sales = sales;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getImage() {
@@ -53,7 +38,7 @@ public class Product {
     }
 
     public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
+        this.image = image;
     }
 
     public String getDetail() {
@@ -61,7 +46,7 @@ public class Product {
     }
 
     public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
+        this.detail = detail;
     }
 
     public Integer getCategoryId() {
@@ -94,21 +79,5 @@ public class Product {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 }
