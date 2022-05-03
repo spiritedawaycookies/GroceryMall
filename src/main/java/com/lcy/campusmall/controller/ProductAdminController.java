@@ -4,7 +4,9 @@ import com.lcy.campusmall.common.ApiRestResponse;
 import com.lcy.campusmall.common.Constant;
 import com.lcy.campusmall.exception.MallException;
 import com.lcy.campusmall.exception.MallExceptionEnum;
+import com.lcy.campusmall.model.pojo.Product;
 import com.lcy.campusmall.model.request.AddProductReq;
+import com.lcy.campusmall.model.request.UpdateProductReq;
 import com.lcy.campusmall.service.ProductService;
 
 import java.io.File;
@@ -15,6 +17,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,12 +55,13 @@ public class ProductAdminController {
     @Autowired
     ProductService productService;
 
+    @Operation(summary = "add product")
     @PostMapping("admin/product/add")
     public ApiRestResponse addProduct(@Valid @RequestBody AddProductReq addProductReq) {
         productService.add(addProductReq);
         return ApiRestResponse.success();
     }
-
+    @Operation(summary = "upload image")
     @PostMapping("admin/upload/file")
     public ApiRestResponse upload(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) {
         String filename = file.getOriginalFilename();
@@ -100,4 +104,38 @@ public class ProductAdminController {
         }
         return effectiveURI;
     }
+
+    @Operation(summary = "admin update product")
+    @PostMapping("/admin/product/update")
+    public ApiRestResponse updateProduct(@Valid @RequestBody UpdateProductReq updateProductReq) {
+        Product product = new Product();
+        BeanUtils.copyProperties(updateProductReq, product);
+        productService.update(product);
+        return ApiRestResponse.success();
+    }
+
+    @Operation(summary = "admin delete product")
+    @PostMapping("/admin/product/delete")
+    public ApiRestResponse deleteProduct(@RequestParam Integer id) {
+        productService.delete(id);
+        return ApiRestResponse.success();
+    }
+
+    @Operation(summary = "admin batch update selling status")
+    @PostMapping("/admin/product/batchUpdateSellStatus")
+    public ApiRestResponse batchUpdateSellStatus(@RequestParam Integer[] ids,
+                                                 @RequestParam Integer sellStatus) {
+        productService.batchUpdateSellStatus(ids, sellStatus);
+        return ApiRestResponse.success();
+    }
+
+    @Operation(summary = "admin product list")
+    @GetMapping("/admin/product/list")
+    public ApiRestResponse list(@RequestParam Integer pageNum,
+                                @RequestParam Integer pageSize) {
+        PageInfo pageInfo = productService.listForAdmin(pageNum, pageSize);
+        return ApiRestResponse.success(pageInfo);
+    }
+
+
 }
