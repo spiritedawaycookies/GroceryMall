@@ -32,6 +32,15 @@ public class Order {
     private Date createTime;
 
     private Date updateTime;
+    private Integer tax;
+
+    public Integer getTax() {
+        return tax;
+    }
+
+    public void setTax(Integer tax) {
+        this.tax = tax;
+    }
 
     public Integer getId() {
         return id;

@@ -141,7 +141,7 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="sales != null">
-        #{sales,jdbcType=BIGINT},
+        sales=#{sales,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}

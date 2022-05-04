@@ -1,7 +1,9 @@
 package com.lcy.campusmall.model.dao;
 
 import com.lcy.campusmall.model.pojo.Order;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer id);
 
