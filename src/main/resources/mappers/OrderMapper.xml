@@ -221,4 +221,10 @@
             tax=#{tax,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from campus_mall_order
+        where order_no = #{orderNo}
+    </select>
 </mapper>

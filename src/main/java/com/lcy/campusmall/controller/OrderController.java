@@ -3,12 +3,11 @@ package com.lcy.campusmall.controller;
 
 import com.lcy.campusmall.common.ApiRestResponse;
 import com.lcy.campusmall.model.request.CreateOrderReq;
+import com.lcy.campusmall.model.vo.OrderVO;
 import com.lcy.campusmall.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,4 +23,10 @@ public class OrderController {
         return ApiRestResponse.success(orderNo);
     }
 
+    @GetMapping("order/detail")
+    @Operation(summary = "order detail")
+    public ApiRestResponse detail(@RequestParam String orderNo) {
+        OrderVO orderVO = orderService.detail(orderNo);
+        return ApiRestResponse.success(orderVO);
+    }
 }

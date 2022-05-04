@@ -13,9 +13,12 @@ import com.lcy.campusmall.model.pojo.OrderItem;
 import com.lcy.campusmall.model.pojo.Product;
 import com.lcy.campusmall.model.request.CreateOrderReq;
 import com.lcy.campusmall.model.vo.CartVO;
+import com.lcy.campusmall.model.vo.OrderItemVO;
+import com.lcy.campusmall.model.vo.OrderVO;
 import com.lcy.campusmall.service.CartService;
 import com.lcy.campusmall.service.OrderService;
 import com.lcy.campusmall.utils.OrderCodeFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -155,5 +158,37 @@ public class OrderServiceImpl implements OrderService {
             orderItemList.add(orderItem);
         }
         return orderItemList;
+    }
+
+    @Override
+    public OrderVO detail(String orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        //订单不存在，则报错
+        if (order == null) {
+            throw new MallException(MallExceptionEnum.NO_ORDER);
+        }
+        //订单存在，需要判断所属
+        Integer userId = UserFilter.currentUser.getId();
+        if (!order.getUserId().equals(userId)) {
+            throw new MallException(MallExceptionEnum.NOT_YOUR_ORDER);
+        }
+        OrderVO orderVO = getOrderVO(order);
+        return orderVO;
+    }
+    private OrderVO getOrderVO(Order order) {
+        OrderVO orderVO = new OrderVO();
+        BeanUtils.copyProperties(order, orderVO);
+        //获取订单对应的orderItemVOList
+        List<OrderItem> orderItemList = orderItemMapper.selectByOrderNo(order.getOrderNo());
+        List<OrderItemVO> orderItemVOList = new ArrayList<>();
+        for (int i = 0; i < orderItemList.size(); i++) {
+            OrderItem orderItem = orderItemList.get(i);
+            OrderItemVO orderItemVO = new OrderItemVO();
+            BeanUtils.copyProperties(orderItem, orderItemVO);
+            orderItemVOList.add(orderItemVO);
+        }
+        orderVO.setOrderItemVOList(orderItemVOList);
+        orderVO.setOrderStatusName(Constant.OrderStatusEnum.codeOf(orderVO.getOrderStatus()).getValue());
+        return orderVO;
     }
 }
