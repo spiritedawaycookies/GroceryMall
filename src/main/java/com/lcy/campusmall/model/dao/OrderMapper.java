@@ -20,4 +20,5 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order row);
     Order selectByOrderNo(String orderNo);
     List<Order> selectForCustomer(Integer userId);
+    List<Order> selectAllForAdmin();
 }
