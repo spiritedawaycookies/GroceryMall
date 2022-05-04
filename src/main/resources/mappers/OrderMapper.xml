@@ -227,4 +227,11 @@
         from campus_mall_order
         where order_no = #{orderNo}
     </select>
+    <select id="selectForCustomer" resultMap="BaseResultMap" parameterType="integer">
+        select
+        <include refid="Base_Column_List"/>
+        from campus_mall_order
+        where user_id = #{userId}
+        order by create_time desc
+    </select>
 </mapper>

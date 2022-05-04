@@ -1,6 +1,7 @@
 package com.lcy.campusmall.controller;
 
 
+import com.github.pagehelper.PageInfo;
 import com.lcy.campusmall.common.ApiRestResponse;
 import com.lcy.campusmall.model.request.CreateOrderReq;
 import com.lcy.campusmall.model.vo.OrderVO;
@@ -28,5 +29,12 @@ public class OrderController {
     public ApiRestResponse detail(@RequestParam String orderNo) {
         OrderVO orderVO = orderService.detail(orderNo);
         return ApiRestResponse.success(orderVO);
+    }
+
+    @GetMapping("order/list")
+    @Operation(summary = "order list")
+    public ApiRestResponse list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        PageInfo pageInfo = orderService.listForCustomer(pageNum, pageSize);
+        return ApiRestResponse.success(pageInfo);
     }
 }

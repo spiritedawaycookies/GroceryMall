@@ -3,6 +3,8 @@ package com.lcy.campusmall.model.dao;
 import com.lcy.campusmall.model.pojo.Order;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,4 +19,5 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order row);
     Order selectByOrderNo(String orderNo);
+    List<Order> selectForCustomer(Integer userId);
 }
