@@ -57,4 +57,10 @@ public class OrderController {
         return ApiRestResponse.success(pngAddress);
     }
 
+    @GetMapping("pay")
+    @Operation(summary = "pay module")
+    public ApiRestResponse pay(@RequestParam String orderNo) {
+        orderService.pay(orderNo);
+        return ApiRestResponse.success();
+    }
 }
