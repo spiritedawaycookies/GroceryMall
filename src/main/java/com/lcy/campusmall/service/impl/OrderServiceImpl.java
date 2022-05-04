@@ -20,6 +20,7 @@ import com.lcy.campusmall.model.vo.OrderItemVO;
 import com.lcy.campusmall.model.vo.OrderVO;
 import com.lcy.campusmall.service.CartService;
 import com.lcy.campusmall.service.OrderService;
+import com.lcy.campusmall.service.UserService;
 import com.lcy.campusmall.utils.OrderCodeFactory;
 import com.lcy.campusmall.utils.QRCodeGenerator;
 import org.springframework.beans.BeanUtils;
@@ -47,6 +48,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
      OrderMapper orderMapper;
 
+    @Autowired
+    UserService userService;
     @Autowired
     OrderItemMapper orderItemMapper;
     @Value("${file.upload.ip}")
@@ -290,5 +293,42 @@ public class OrderServiceImpl implements OrderService {
             throw new MallException(MallExceptionEnum.WRONG_ORDER_STATUS);
         }
     }
+    //发货
+    @Override
+    public void deliver(String orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        //查不到订单，报错
+        if (order == null) {
+            throw new MallException(MallExceptionEnum.NO_ORDER);
+        }
+        if (order.getOrderStatus() == Constant.OrderStatusEnum.PAID.getCode()) {
+            order.setOrderStatus(Constant.OrderStatusEnum.DELIVERED.getCode());
+            order.setDeliveryTime(new Date());
+            orderMapper.updateByPrimaryKeySelective(order);
+        } else {
+            throw new MallException(MallExceptionEnum.WRONG_ORDER_STATUS);
+        }
+    }
 
+    @Override
+    public void finish(String orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        //查不到订单，报错
+        if (order == null) {
+            throw new MallException(MallExceptionEnum.NO_ORDER);
+        }
+        //如果是普通用户，就要校验订单的所属
+        if (!userService.checkAdminRole(UserFilter.currentUser) && !order.getUserId()
+                .equals(UserFilter.currentUser.getId())) {
+            throw new MallException(MallExceptionEnum.NOT_YOUR_ORDER);
+        }
+        //发货后可以完结订单
+        if (order.getOrderStatus() == Constant.OrderStatusEnum.DELIVERED.getCode()) {
+            order.setOrderStatus(Constant.OrderStatusEnum.FINISHED.getCode());
+            order.setEndTime(new Date());
+            orderMapper.updateByPrimaryKeySelective(order);
+        } else {
+            throw new MallException(MallExceptionEnum.WRONG_ORDER_STATUS);
+        }
+    }
 }
