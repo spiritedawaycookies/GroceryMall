@@ -2,6 +2,7 @@ package com.lcy.campusmall.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.zxing.WriterException;
 import com.lcy.campusmall.common.Constant;
 import com.lcy.campusmall.exception.MallException;
 import com.lcy.campusmall.exception.MallExceptionEnum;
@@ -20,12 +21,18 @@ import com.lcy.campusmall.model.vo.OrderVO;
 import com.lcy.campusmall.service.CartService;
 import com.lcy.campusmall.service.OrderService;
 import com.lcy.campusmall.utils.OrderCodeFactory;
+import com.lcy.campusmall.utils.QRCodeGenerator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -42,6 +49,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderItemMapper orderItemMapper;
+    @Value("${file.upload.ip}")
+    String ip;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -235,5 +244,25 @@ public class OrderServiceImpl implements OrderService {
             throw new MallException(MallExceptionEnum.WRONG_ORDER_STATUS);
         }
     }
+    @Override
+    public String qrcode(String orderNo) {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        //这里不能直接get ip因为阿里云之类都是层层转发，对外暴露的ip实际上和拿到的（是内网的）不一样，就吧对外ip写进配置里
+        String address = ip + ":" + request.getLocalPort();
+        String payUrl = "http://" + address + "/pay?orderNo=" + orderNo;
+        try {
+            QRCodeGenerator
+                    .generateQRCodeImage(payUrl, 350, 350,
+                            Constant.FILE_UPLOAD_DIR + orderNo + ".png");
+        } catch (WriterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String pngAddress = "http://" + address + "/images/" + orderNo + ".png";
+        return pngAddress;
 
+    }
 }

@@ -90,6 +90,11 @@
         <artifactId>guava</artifactId>
         <version>31.1-jre</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.4.1</version>
+        </dependency>
     </dependencies>
 
     <build>
