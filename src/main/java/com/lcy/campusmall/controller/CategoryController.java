@@ -32,7 +32,7 @@ public class CategoryController {
      * 后台添加目录
      */
 
-    @Operation(summary = "添加商品类别")
+    @Operation(summary = "admin add category")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "成功添加", content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "添加失败", content = @Content)
@@ -59,7 +59,7 @@ public class CategoryController {
         categoryService.add(addCategoryReq);
         return ApiRestResponse.success();
     }
-    @Operation(summary = "后台删除目录")
+    @Operation(summary = "admin delete category")
     @PostMapping("admin/category/delete")
     @ResponseBody
     public ApiRestResponse deleteCategory(@RequestParam Integer id) {
@@ -67,7 +67,7 @@ public class CategoryController {
         return ApiRestResponse.success();
     }
 
-    @Operation(summary = "后台目录列表(分页)",description = "给管理员看")
+    @Operation(summary = "admin category list(with pagination)",description = "for admin")
     @GetMapping("admin/category/list")
     @ResponseBody
     public ApiRestResponse listCategoryForAdmin(@RequestParam Integer pageNum,
@@ -75,7 +75,7 @@ public class CategoryController {
         PageInfo pageInfo = categoryService.listForAdmin(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);
     }
-    @Operation(summary = "前台目录列表",description = "递归,给用户看")
+    @Operation(summary = "category list",description = "recursive, for customers")
     @GetMapping("category/list")
     @ResponseBody
     public ApiRestResponse listCategoryForCustomer() {

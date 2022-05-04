@@ -20,13 +20,13 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @Operation(summary = "商品详情")
+    @Operation(summary = "product detail")
     @GetMapping("product/detail")
     public ApiRestResponse detail(@RequestParam Integer id) {
         Product product = productService.detail(id);
         return ApiRestResponse.success(product);
     }
-    @Operation(summary = "商品列表")
+    @Operation(summary = "product list")
     @GetMapping("product/list")
     public ApiRestResponse list(ProductListReq productListReq){
         PageInfo list = productService.list(productListReq);

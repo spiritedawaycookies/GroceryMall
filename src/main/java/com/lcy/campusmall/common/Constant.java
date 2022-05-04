@@ -20,4 +20,12 @@ public class Constant {
         Set<String> PRICE_ASC_DESC=Sets.newHashSet("price desc","price asc");
         Set<String> SALES_ASC_DESC=Sets.newHashSet("sales desc","sales asc");
     }
+    public interface SaleStatus{
+        int NOT_SALE=0;
+        int SALE=1;
+    }
+    public interface Cart{
+        int UN_CHECKED = 0;//购物车未选中状态
+        int CHECKED = 1;//购物车选中状态
+    }
 }

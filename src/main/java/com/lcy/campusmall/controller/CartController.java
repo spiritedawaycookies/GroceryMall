@@ -1,0 +1,47 @@
+package com.lcy.campusmall.controller;
+
+import com.lcy.campusmall.common.ApiRestResponse;
+import com.lcy.campusmall.common.Constant;
+import com.lcy.campusmall.exception.MallException;
+import com.lcy.campusmall.exception.MallExceptionEnum;
+import com.lcy.campusmall.filter.UserFilter;
+import com.lcy.campusmall.model.dao.ProductMapper;
+import com.lcy.campusmall.model.pojo.Product;
+import com.lcy.campusmall.model.vo.CartVO;
+import com.lcy.campusmall.service.CartService;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * 描述：     购物车Controller
+ */
+@RestController//json格式的必须是restcontroller
+@RequestMapping("/cart")
+public class CartController {
+    @Autowired
+    CartService cartService;
+
+    @Autowired
+    ProductMapper productMapper;
+
+    @GetMapping("/list")
+    @Operation(summary = "cart list")
+    public ApiRestResponse list() {
+        //内部获取用户ID，防止横向越权
+        List<CartVO> cartList = cartService.list(UserFilter.currentUser.getId());
+        return ApiRestResponse.success(cartList);
+    }
+
+    @PostMapping("/add")
+    @Operation(summary = "add to cart")
+    public ApiRestResponse add(@RequestParam Integer productId, @RequestParam Integer count) {
+
+        List<CartVO> cartVOList = cartService.add(UserFilter.currentUser.getId(), productId, count);
+        return ApiRestResponse.success(cartVOList);
+    }
+
+
+}
