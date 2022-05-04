@@ -180,4 +180,24 @@
     from campus_mall_product
     order by update_time desc
   </select>
+  <select id="selectList" resultMap="BaseResultMap"
+          parameterType="com.lcy.campusmall.model.query.ProductListQuery">
+    select
+    <include refid="Base_Column_List"/>
+    from campus_mall_product
+    <where>
+      <if test="query.keyword != null">
+      <!--like就是模糊查找-->
+        and name like #{query.keyword}
+      </if>
+      <if test="query.categoryIds != null">
+        and category_id in
+        <foreach collection="query.categoryIds" close=")" item="item" open="(" separator=",">
+          #{item}
+        </foreach>
+      </if>
+      and status = 1
+    </where>
+    order by update_time desc
+  </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.lcy.campusmall.model.dao;
 
 import com.lcy.campusmall.model.pojo.Product;
+import com.lcy.campusmall.model.query.ProductListQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -22,5 +23,5 @@ public interface ProductMapper {
     Product selectByName(String name);
     int batchUpdateSellStatus(@Param("ids") Integer[] ids, @Param("sellStatus") Integer sellStatus);
     List<Product> selectListForAdmin();
-
+    List<Product> selectList(@Param("query") ProductListQuery query);
 }
