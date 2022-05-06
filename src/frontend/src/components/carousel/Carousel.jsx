@@ -1,7 +1,6 @@
 import React from 'react';
 import banners from "./banners.js"
 import Banner from './Banner.jsx';
-import $ from 'jquery';
 function createBanner(bannerItem) {
   return (
     <Banner
@@ -17,7 +16,7 @@ function createBanner(bannerItem) {
 function Carousel() {
   
   var image = banners[0].imgURL;
-  console.log(image); 
+  //console.log(image); 
   return (
     <div id="myCarousel" class="carousel slide container-fluid" data-bs-ride="carousel">
     <div class="carousel-indicators">

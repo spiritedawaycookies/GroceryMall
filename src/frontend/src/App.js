@@ -4,17 +4,20 @@ import './App.css';
 import Nav from './components/nav/Nav';
 import Header from './components/nav/Header';
 import Carousel from './components/carousel/Carousel';
-import Main from './components/Main';
 import './styles.css';
 import Footer from './components/footer/Footer';
+import PaginatedItems from './components/paging/PaginatedItems';
 function App() {
   return (
     <div className="App">
       <Nav />
       <Header />
       <Carousel />
-      <Main />
+      {/* <Main /> */}
+      
+      <PaginatedItems itemsPerPage={4}/>
       <Footer/>
+     
     </div>
   );
 }
