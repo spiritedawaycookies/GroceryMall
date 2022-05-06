@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MallWebMVCConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
+        registry.addResourceHandler("/admin/**").addResourceLocations("classpath:/static/admin/");
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("file:///"+ Constant.FILE_UPLOAD_DIR);
     }
