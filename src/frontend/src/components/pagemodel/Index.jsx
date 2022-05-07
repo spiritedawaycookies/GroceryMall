@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductCard from '../ProductCard';
 function Index({ currentItems }){
-
+//所有的products
         return (
             <div className='center'>
             <div class="my-5">

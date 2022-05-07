@@ -6,7 +6,7 @@ import Header from './components/nav/Header';
 import Carousel from './components/carousel/Carousel';
 import './styles.css';
 import Footer from './components/footer/Footer';
-import PaginatedItems from './components/paging/PaginatedItems';
+import PaginatedItems from './components/pagemodel/PaginatedItems';
 function App() {
   return (
     <div className="App">
