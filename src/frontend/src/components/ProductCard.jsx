@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 function ProductCard(props) {
-    let isSale = props.isSale;
+    // let isSale = props.isSale;
+    let originprice=props.price/100*1.1;
+    let isSale=true;
     return (
         <div class="col my-3 mx-1 px-1">
 
@@ -14,12 +16,12 @@ function ProductCard(props) {
                 <img style={{ height: "200px", width: "auto", maxWidth: "100%", maxHeight: "100%" }} className="img" src={props.image} alt="..." />
 
                 {/* <!-- Product details--> */}
-                <div style={{ height: "80px" }} class="card-body bg-light p-4">
+                <div style={{ height: "120px" }} class="card-body bg-light p-4">
                     <div class="text-center">
                         {/* <!-- Product name--> */}
                         <h5 style={{ fontSize: "100%" }} class="fw-bolder text-dark card-title">{props.name}</h5>
                         {/* <!-- Product price--> */}
-                        <span style={{ fontSize: "70%" }} class="text-muted text-decoration-line-through"> ${props.originprice}</span>  <span className='text-dark '>${props.price}</span>
+                        <span style={{ fontSize: "70%" }} class="text-muted text-decoration-line-through"> {originprice}</span>  <span className='text-dark '>${props.price/100}</span>
                     </div>
                 </div>
                 {/* <!-- Product actions--> */}

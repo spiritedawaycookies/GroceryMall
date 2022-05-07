@@ -9,13 +9,13 @@ function Index({ currentItems }){
 
                     {currentItems && currentItems.map((item) => (
                         <ProductCard
-                            key={item.key}
+                            key={item.id}
                             name={item.name}
-                            image={item.imgURL}
+                            image={item.image}
                             price={item.price}
                             sales={item.sales}
                             isSale={item.isSale}
-                            originprice={item.originprice}
+
                         />
                         // <div>
                         //     {console.log(item)}

@@ -6,7 +6,7 @@ import Header from './components/nav/Header';
 import Carousel from './components/carousel/Carousel';
 import './styles.css';
 import Footer from './components/footer/Footer';
-import PaginatedItems from './components/pagemodel/PaginatedItems';
+import IndexPageModel from './components/pagemodel/IndexPageModel';
 function App() {
   return (
     <div className="App">
@@ -15,7 +15,7 @@ function App() {
       <Carousel />
       {/* <Main /> */}
       
-      <PaginatedItems itemsPerPage={4}/>
+      <IndexPageModel/>
       <Footer/>
      
     </div>

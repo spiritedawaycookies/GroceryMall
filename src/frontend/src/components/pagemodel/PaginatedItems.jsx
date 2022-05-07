@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import products from '../products.js';
 import Index from './Index';
-const items = products;
+// var items = products;
 
-function PaginatedItems({ itemsPerPage }) {
+function PaginatedItems({ itemsPerPage ,test,productData}) {
+   const items=productData.list;
     // We start with an empty list of items.
-    const [currentItems, setCurrentItems] = useState(items.slice(0, 8));
+    const [currentItems, setCurrentItems] = useState(null);
     // console.log(currentItems);
     const [pageCount, setPageCount] = useState(0);
     // Here we use item offsets; we could also use page offsets
     // following the API or data you're working with.
     const [itemOffset, setItemOffset] = useState(0);
-
+    //console.log(test);
+   console.log(productData);
     useEffect(() => {
         // Fetch items from another resources.
         const endOffset = itemOffset + itemsPerPage;
