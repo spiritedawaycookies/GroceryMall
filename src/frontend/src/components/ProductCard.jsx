@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 
 function ProductCard(props) {
     // let isSale = props.isSale;
-    let originprice=props.price/100*1.1;
+    let originprice=Math.floor(props.price*1.1)/100;
     let isSale=true;
     return (
-        <div class="col my-3 mx-1 px-1">
+        <div class="col my-3 mx-2 px-1">
 
-            <div style={{ width: "300px" }} class="center card ">
+            <div style={{ width: "400px" }} class="center card ">
 
                 {isSale && <div class="badge bg-primary text-white position-absolute" style={{ top: "1rem", right: "1rem" }}>Sale</div>
                 }
                 {/* <!-- Product image--> */}
 
-                <img style={{ height: "200px", width: "auto", maxWidth: "100%", maxHeight: "100%" }} className="img" src={props.image} alt="..." />
+                <img style={{ height: "300px", width: "auto", maxWidth: "100%", maxHeight: "100%" }} className="img" src={props.image} alt="..." />
 
                 {/* <!-- Product details--> */}
                 <div style={{ height: "120px" }} class="card-body bg-light p-4">

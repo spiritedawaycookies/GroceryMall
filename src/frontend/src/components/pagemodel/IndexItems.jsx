@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from '../ProductCard';
-function Index({ currentItems }){
+function IndexItems({ currentItems }){
 //所有的products
         return (
             <div className='center'>
@@ -33,4 +33,4 @@ function Index({ currentItems }){
     
 }
 
-export default Index;
+export default IndexItems;

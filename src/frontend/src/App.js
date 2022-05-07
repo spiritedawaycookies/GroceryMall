@@ -5,19 +5,29 @@ import Nav from './components/nav/Nav';
 import Header from './components/nav/Header';
 import Carousel from './components/carousel/Carousel';
 import './styles.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Footer from './components/footer/Footer';
-import IndexPageModel from './components/pagemodel/IndexPageModel';
+import Index from './components/main/Index'
+import Login from './components/main/Login';
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <Header />
-      <Carousel />
-      {/* <Main /> */}
-      
-      <IndexPageModel/>
-      <Footer/>
-     
+
+      <Router>
+
+        <Nav />
+        
+
+        <Switch>
+          {/* <Route path="/" component={Index}></Route> */}
+          <Route path="/product/list" component={Index}></Route>
+          <Route path='/login' component={Login}></Route>
+         
+        </Switch>
+        <Footer />
+
+      </Router>
+
     </div>
   );
 }
