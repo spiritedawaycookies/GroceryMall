@@ -14,6 +14,8 @@ public class Constant {
     public static final Integer SALT_ROUND=2;
     public static final Double TAX_RATE=0.12;
     public static String FILE_UPLOAD_DIR;
+    public static final String BACKEND_URL="http://localhost:8083";
+    public static final String FRONTEND_URL="http://localhost:3001";
     @Value("${file.upload.dir}")//配置文件中写 static变量用普通方式无法注入
     public void setFileUploadDir(String fileUploadDir){
         FILE_UPLOAD_DIR= fileUploadDir;
@@ -30,6 +32,7 @@ public class Constant {
         int UN_CHECKED = 0;//购物车未选中状态
         int CHECKED = 1;//购物车选中状态
     }
+
     public enum OrderStatusEnum {
         CANCELED(0, "Cancelled"),
         NOT_PAID(10, "Not paid"),

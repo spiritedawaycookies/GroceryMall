@@ -19,9 +19,8 @@ function App() {
         
 
         <Switch>
-          {/* <Route path="/" component={Index}></Route> */}
-          <Route path="/product/list" component={Index}></Route>
-          <Route path='/login' component={Login}></Route>
+          <Route exact path="/" component={Index}></Route>
+          <Route exact path="/product/list" component={Index}></Route>
          
         </Switch>
         <Footer />

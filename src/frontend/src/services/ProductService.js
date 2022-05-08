@@ -1,5 +1,6 @@
 import axios from 'axios';
-const PRODUCT_API_BASE_URL = "http://127.0.0.1:8083/product/list";
+import urls from '../constant.js'
+const PRODUCT_API_BASE_URL = urls[0].backendUrl+"/product/list";
 class ProductService {
     getProductsDefault() {
         return axios.get(PRODUCT_API_BASE_URL+'?pageNum=1&pageSize=1000');

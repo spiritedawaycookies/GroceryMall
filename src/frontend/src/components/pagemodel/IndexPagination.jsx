@@ -17,9 +17,9 @@ class IndexPagination extends Component {
     }
     async componentDidMount() {
         const res = await ProductService.getProductsAtPage(this.state.curPage, this.state.itemsPerPage).then(res => {
-            this.setState({ currentItems: res.data.data.list, init: 1, pageCount: res.data.data.total / this.state.itemsPerPage });
+            this.setState({ currentItems: res.data.data.list, init: 1, pageCount:  Math.ceil(res.data.data.total / this.state.itemsPerPage) });
             // console.log("aaaaaaa");
-            console.log("total:" + res.data.data.total);
+           // console.log("total:" + res.data.data.total);
             
         });
 
@@ -50,7 +50,7 @@ class IndexPagination extends Component {
                             // console.log(newPage);
                             ProductService.getProductsAtPage(newPage, this.state.itemsPerPage).then(res => {
                                 this.setState({ curPage: newPage, currentItems: res.data.data.list });
-                                console.log("currentItems:" + this.state.currentItems.length);
+                               // console.log("currentItems:" + this.state.currentItems.length);
                                 // console.log(this.state.products);
                             });
 
