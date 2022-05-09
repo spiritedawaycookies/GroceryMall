@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../../assets/images/applogo.png"
 function Header() {
     return (
 
@@ -8,7 +9,7 @@ function Header() {
                     <a href="/" className="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
                         {/* <svg className="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> */}
 
-                        <img style={{ width: "30%" }} src="http://localhost:8083/images/grocerymall.png" />
+                        <img style={{ width: "35%" }} src={logo} />
 
                     </a>
 

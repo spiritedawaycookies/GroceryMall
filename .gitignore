@@ -55,7 +55,7 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+**/.vscode/
 
 **/applicationContext.xml
 **/META-INF/
