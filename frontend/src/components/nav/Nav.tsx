@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { FiShoppingCart } from 'react-icons/fi';
 import { RiUserSmileFill } from 'react-icons/ri'
 import { appContext } from '../../index'
@@ -22,7 +22,7 @@ const Nav: React.FC<Props> = (props: Props) => {
     const [getCategoriesSuccess, setGetCategoriesSuccess] = useState<boolean>(false);
     const [activeItem, setActiveItem] = useState<string>("");
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [userName, setUserName] = useState<string>();
+    const value= useContext(appContext)
     useEffect(() => {
         //每次ui渲染或者状态改变useEffect都会执行（默认），第二个参数是调用时机是一个状态列表（比如state）,如果状态列表变化就会执行
         //如果是一个[]就是类似componentDidMount在挂载组件时调用一次 此时调用api可以
@@ -69,9 +69,7 @@ const Nav: React.FC<Props> = (props: Props) => {
 
 
     return (
-        <appContext.Consumer>
-            {(value) => {
-                return <>
+      <>
 
                     <nav className="py-0 border-bottom bg-primary">
 
@@ -100,7 +98,7 @@ const Nav: React.FC<Props> = (props: Props) => {
                                 <ul className="nav">
 
                                     {/* <li className="nav-item">{props.username || props.username !== "" ? <a href="#" className="nav-link link-dark px-2"> <span><RiUserSmileFill /></span> {props.username}</a> : <a className="nav-link link-dark px-2">Login</a>}</li> */}
-                                    <li className="nav-item">{value.username || value.username !== "" ? <a href="#" className="nav-link link-dark px-2"> <span><RiUserSmileFill /></span> {value.username}</a> : <a className="nav-link link-dark px-2">Login</a>}</li>
+                                    <li className="nav-item">{value.username || value.username !== "" ? <a href="#" className="nav-link link-dark px-2"><span><RiUserSmileFill/></span>{value.username}</a>:<a className="nav-link link-dark px-2">Login</a>}</li>
 
                                     {/* 购物车 */}
                                     <div className="nav-item">
@@ -123,9 +121,7 @@ const Nav: React.FC<Props> = (props: Props) => {
                     </nav>
 
                 </>
-            }}
-        </appContext.Consumer>
-
+           
     );
 
 }

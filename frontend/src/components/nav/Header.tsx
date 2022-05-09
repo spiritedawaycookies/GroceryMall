@@ -1,6 +1,12 @@
 import React from "react";
 import logo from "../../assets/images/applogo.png"
-function Header() {
+
+const Header: React.FC = () => {
+    // const renderHotwords=()=>{
+    //     return(
+
+    //     )
+    // }
     return (
 
         <header className="py-5 bg-light">
@@ -24,13 +30,13 @@ function Header() {
                             <input type="text" className="form-control " placeholder="Search..." aria-label="Input group example" aria-describedby="basic-addon1" />
                         </div>
                         <table className="input-group m-2 width85 ">
-                        <ul id="horizontal-list" className="input-group container">
-                            <li className="m-3">An item</li>
-                            <li className="m-3">A second item</li>
-                            <li className="m-3">A third item</li>
-                            <li className="m-3">A third item</li>
-                            <li className="m-3">More...</li>
-                        </ul>
+                            <ul id="horizontal-list" className="input-group container">
+                                <li className="m-3">An item</li>
+                                <li className="m-3">A second item</li>
+                                <li className="m-3">A third item</li>
+                                <li className="m-3">A third item</li>
+                                <li className="m-3">More...</li>
+                            </ul>
                         </table>
                     </div>
                 </div>
