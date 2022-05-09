@@ -6,22 +6,11 @@ const USER_API_REGISTER_URL = urls[0].backendUrl + "/register";
 
 class UserService {
     jumpToLogin(){
-        return axios.get(USER_API_LOGIN_URL).then(function (response) {
-            // handle success
-            console.log(response);
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-          })
+        return axios.get(USER_API_LOGIN_URL)
     }
     login(userName, password) {
-        return axios.post(USER_API_LOGIN_URL, {
-            "userName": userName,
-            "password": password
-        }).then(res=>{
-            console.log(res);
-        }).catch(err=>console.log(err))
+        return axios.post(USER_API_LOGIN_URL+'?userName='+userName+'&password='+password
+        );
     }
 }
 

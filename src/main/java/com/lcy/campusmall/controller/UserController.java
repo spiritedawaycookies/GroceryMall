@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+@CrossOrigin(origins = Constant.FRONTEND_URL)
+
 @Controller
 public class UserController {
     @Autowired
@@ -29,8 +31,8 @@ public class UserController {
     @PostMapping("/register")
     @ResponseBody
     //参数在请求中,所以要加注解指定参数名
-    public ApiRestResponse register(@RequestParam("userName") String userName,
-                                    @RequestParam("password") String password) throws MallException {
+    public ApiRestResponse register(@RequestParam(name="userName") String userName,
+                                    @RequestParam(name="password") String password) throws MallException {
         if (StringUtils.isEmpty(userName)) {
             return ApiRestResponse.error(MallExceptionEnum.NEED_USER_NAME);
         }
