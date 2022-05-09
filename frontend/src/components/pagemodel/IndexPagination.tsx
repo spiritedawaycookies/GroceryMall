@@ -53,13 +53,13 @@ const IndexPagination: React.FC<Props> = (props:Props) => {
             console.log("fetched");
 
 
-            console.log(data.data.list);
+           // console.log(data.data.list);
             setloading(true);
             // if (loading) {
                 setcurrentItems(data.data.list);
                 console.log("currentItems");
 
-                console.log(currentItems);
+              //  console.log(currentItems);
                 setpageCount(Math.ceil(data.data.total / itemsPerPage));
                 console.log(pageCount);
                

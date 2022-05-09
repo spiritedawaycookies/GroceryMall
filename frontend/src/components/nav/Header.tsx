@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/applogo.png"
 
 const Header: React.FC = () => {
@@ -7,6 +7,42 @@ const Header: React.FC = () => {
 
     //     )
     // }
+    const [hotWords, setHotwords] = useState<Array<{name:string}>>([])
+    const [loading, setloading] = useState<boolean>(true);
+    const [err, setErr] = useState<string>();
+
+    useEffect(() => {
+        // Fetch items from another resources.
+        // console.log(newPage);
+        fetch('http://localhost:8083/product/list?pageNum=1&pageSize=2&orderBy=sales desc').then(res => res.json()).then(data => {
+            console.log("fetched");
+
+
+            console.log(data.data.list);
+            setloading(false);
+            if (!loading) {
+                setHotwords(data.data.list);
+                console.log("hotWords");
+
+                console.log(hotWords);
+
+
+                console.log("loading:" + loading);
+            }
+
+        });
+
+    }, []);
+
+    const renderHotwords = () => {
+        if (!loading) {
+            //http://localhost:8083/product/detail?id=1
+            return hotWords.map(i => { return  <a href="#" className="text-muted"><li className="m-3 ">{i.name}</li> </a>}
+            )
+        } else return <li className="m-3 text-muted">Hot Products...</li>
+
+    }
+
     return (
 
         <header className="py-5 bg-light">
@@ -31,11 +67,10 @@ const Header: React.FC = () => {
                         </div>
                         <table className="input-group m-2 width85 ">
                             <ul id="horizontal-list" className="input-group container">
-                                <li className="m-3">An item</li>
-                                <li className="m-3">A second item</li>
-                                <li className="m-3">A third item</li>
-                                <li className="m-3">A third item</li>
-                                <li className="m-3">More...</li>
+                                <div id="renderList">
+                                    {renderHotwords()}
+                                 <a href="#">   <li className="m-3">More...</li> </a>
+                                </div>
                             </ul>
                         </table>
                     </div>
