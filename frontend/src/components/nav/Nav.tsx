@@ -1,7 +1,7 @@
 import React, { useState, useEffect,useContext } from "react";
 import { FiShoppingCart } from 'react-icons/fi';
 import { RiUserSmileFill } from 'react-icons/ri'
-import { appContext } from '../../index'
+import { appContext } from "../../AppState";
 // import UserService from "../../services/UserService";
 import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom';
 // import Login from '../main/Login'
