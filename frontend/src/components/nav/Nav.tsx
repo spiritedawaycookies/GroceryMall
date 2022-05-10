@@ -23,7 +23,6 @@ const Nav: React.FC<Props> = (props: Props) => {
     const [activeItem, setActiveItem] = useState<string>("");
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [cartOpen, setCartOpen] = useState<boolean>(false);
-    const [emptyCart, setEmptyCart] = useState<boolean>(true);
     const value = useContext(appContext)
     const setState = useContext(appSetStateContext);
     useEffect(() => {
@@ -58,35 +57,25 @@ const Nav: React.FC<Props> = (props: Props) => {
         // }
         setCartOpen(!cartOpen);
     }
-    useEffect(()=>{
-        if(value.cart.length==0){
-            setEmptyCart(true);
-        }
-    },
-    []
 
-    )
     const renderCart = () => {
-        let rendered:any = (<div>
-            <IoIosHeartEmpty />&nbsp;&nbsp;
-            Your cart is empty
-        </div>);
-        if (!emptyCart) {
 
-            console.log(value.cart);
 
-            console.log(typeof value.cart);
-            rendered=value.cart.map
+        console.log("click cart");
+
+        console.log(value.cart);
+
+        console.log(typeof value.cart);
+        return value.cart.map
             (item => <div className="form-group">
                 <div className="custom-control custom-checkbox">
                     <input type="checkbox" className="custom-control-input" id="same-address" />
                     <label className="custom-control-label" htmlFor="same-address">&nbsp;&nbsp;{item.productName} </label>
                 </div>
             </div>)
-            setEmptyCart(false);
-            
-        }
-        return rendered;
+
+
+
     }
 
     // const renderEmpty=()=>{
@@ -167,7 +156,8 @@ const Nav: React.FC<Props> = (props: Props) => {
                                     <div className="dropdown-menu " style={{ display: cartOpen ? "block" : "none", right: 0, left: "auto", width: "auto" }}>
                                         <div className="dropdown-menu-right ">
                                             <form className=" dropdown-item px-4 py-3">
-                                                {renderCart()}
+                                                {value.cart.length == 0 ? <div><IoIosHeartEmpty/>&nbsp;&nbsp;Your cart is empty
+                                                </div> : renderCart()}
 
                                                 <div className="containter">
                                                     <button type="submit" className="btn btn-primary mt-2 center">Checkout</button>

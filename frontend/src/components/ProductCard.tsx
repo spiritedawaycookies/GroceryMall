@@ -31,7 +31,7 @@ function ProductCard(props:CardProp){
                     {/* <!-- Product actions--> */}
                     <div className="card-footer bg-light  p-4 pt-0 border-top-0">
                         <AddToCartBtn
-                        id={props.id}
+                        pid={props.id}
                         productName={props.name}
                         price={props.price}
                         />

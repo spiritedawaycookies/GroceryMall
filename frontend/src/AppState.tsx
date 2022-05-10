@@ -12,7 +12,7 @@ interface AppStateValue {
     nickname: string,
     profilePic: string,
     cart: Array<{
-           id: number,
+           pid: number,
            productName:string,
            quantity:number,
            totalPrice:number
