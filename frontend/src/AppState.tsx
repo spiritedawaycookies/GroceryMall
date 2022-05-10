@@ -3,21 +3,27 @@ import constant from './constant.json'
 // interface cartItem{
 //     productId:number,productName: string, productImage: string, quantity: number, price: number, totalPrice: number 
 // }
-
-interface CardProp {
-    id: number, name: string, image: string, price: number, sales: number, isSale: boolean
+interface productId{
+    pid:number
 }
+interface CartProp {
+    pid:number
+    productName:string,
+       quantity:number,
+         totalPrice:number
+}
+// interface cartMap{
+//     [pid:number]:{
+//         productName:string,
+//         quantity:number,
+//         totalPrice:number
+//     }
+// }
 interface AppStateValue {
     username: string,
     nickname: string,
     profilePic: string,
-    cart: Array<{
-           pid: number,
-           productName:string,
-           quantity:number,
-           totalPrice:number
-        }>
-
+    cart: Map<number,CartProp>
      
     // addOnetoCart:()=>{}
 
@@ -27,7 +33,7 @@ const defaultContexValue: AppStateValue = {
     nickname: 'lcy',
     profilePic: 'https://i.natgeofe.com/n/46b07b5e-1264-42e1-ae4b-8a021226e2d0/domestic-cat_thumb_square.jpg',
     cart:  
-        [ ]
+        new Map()
     }
     // addOnetoCart:()=>{return true;}
     

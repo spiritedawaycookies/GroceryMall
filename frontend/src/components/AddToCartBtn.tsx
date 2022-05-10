@@ -2,63 +2,48 @@ import React, { useContext, useState } from 'react';
 import { idText } from 'typescript';
 import { appContext, appSetStateContext } from "../AppState";
 
-// interface BTNProps {
-//     id: number
-// }
+interface BTNProps {
+    pid: number,
+    productName:string,
+    price:number
+}
 
-function AddToCartBtn({ pid, productName, price }) {
+const AddToCartBtn:React.FC<BTNProps>=({ pid, productName, price })=> {
     const value = useContext(appContext)
     const stState = useContext(appSetStateContext);
-    let found = value.cart.find(ele => ele.pid == pid);
-    console.log("found", found);
+    let found = value.cart.get(pid);
+    // console.log("found", found);
     if (found !== undefined) {
         var quantity = found?.quantity
     } else {
 
         var quantity: number = 0;
     }
-
+    
     //千万不要用useState, 会不停的重复渲染
-    const addToCart = (pid) => {
-        if (quantity === 0) {
-            quantity += 1;
-            let totalPrice = price * quantity;
+    const addToCart = () => {
+        quantity += 1;
+        let totalPrice = price * quantity;
 
-            if (stState) {
-                console.log(quantity);
-                stState(stt => {
-                    return {
-                        ...stt,
-                        cart: [...stt.cart, {
-                            pid, productName, quantity, totalPrice
-                        }]
-                    }
+
+        let newCart = value.cart.set(pid, {pid, productName, quantity, totalPrice })
+        if (stState) {
+            // console.log(quantity);
+            stState(stt => {
+                return {
+                    ...stt,
+                    cart: newCart
                 }
-
-                )
             }
-            console.log(value.cart);
-        } else {
-            // quantity += 1;
-            // let totalPrice = price * quantity;
-            // if (found !== undefined) {
-            //     found.quantity = quantity;
-            // }
-            // if (stState) {
-            //     console.log(quantity);
-            //     stState(stt => {
-            //         return {
-            //             ...stt,
-            //             cart: [...stt.cart, {
-            //                 pid, productName, quantity, totalPrice
-            //             }]
-            //         }
-            //     }
 
-            //     )
-            // }
-            // console.log(value.cart);
+            )
         }
+        console.log("pid type",typeof pid);
+        console.log("car value type",typeof value.cart.get(25));
+        
+        console.log("cart",value.cart);
+        
+
 
     }
     return <>

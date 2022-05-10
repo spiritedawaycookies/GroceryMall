@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { appContext, appSetStateContext } from "../AppState";
 import AddToCartBtn from './AddToCartBtn'
-interface CardProp {
+interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean,quantity:number
 }
-function ProductCard(props:CardProp){
+const ProductCard:React.FC<CardProps>=(props:CardProps)=>{
     let originprice = Math.floor(props.price * 1.1) / 100;
-   console.log(props.isSale);
+//    console.log(props.isSale);
    
         return (
             <div className="col my-3 mx-2 px-1">

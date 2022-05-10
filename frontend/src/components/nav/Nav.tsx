@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { FiShoppingCart } from 'react-icons/fi';
 import { IoIosHeartEmpty } from 'react-icons/io'
 import { appContext, appSetStateContext } from "../../AppState";
+import styles from './nav.module.css'
 // import UserService from "../../services/UserService";
 import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom';
 // import Login from '../main/Login'
@@ -16,7 +17,11 @@ interface Props {
 //     activeItem: string,
 //     isOpen: boolean
 // }
-
+interface CartProp {
+    productName: string,
+    quantity: number,
+    totalPrice: number
+}
 const Nav: React.FC<Props> = (props: Props) => {
     const [categories, setCategories] = useState<Array<string>>(["Loading"]);
     const [getCategoriesSuccess, setGetCategoriesSuccess] = useState<boolean>(false);
@@ -48,6 +53,7 @@ const Nav: React.FC<Props> = (props: Props) => {
         // }
         setIsOpen(!isOpen);
 
+
     }
     const handleCartClick = (e: any) => {
         //    console.log(e.target);//事件发生的元素
@@ -56,26 +62,39 @@ const Nav: React.FC<Props> = (props: Props) => {
         //     setIsOpen(!isOpen);
         // }
         setCartOpen(!cartOpen);
+        console.log("cartopen", cartOpen);
+
+    }
+
+    const IndexCut = (str: string, substr: string, idx: number) => {
+        let index = str.split(substr, idx).join(substr).length;
+        return str.substring(0, index);
     }
 
     const renderCart = () => {
 
 
-        console.log("click cart");
+        // console.log("click cart");
 
-        console.log(value.cart);
+        // console.log(value.cart);
 
-        console.log(typeof value.cart);
-        return value.cart.map
-            (item => <div className="form-group">
-                <div className="custom-control custom-checkbox">
-                    <input type="checkbox" className="custom-control-input" id="same-address" />
-                    <label className="custom-control-label" htmlFor="same-address">&nbsp;&nbsp;{item.productName} </label>
-                </div>
-            </div>)
+        let mapToArray = Array.from(value.cart.values());
 
+        return mapToArray.map(item => <tr className="form-group p-2">
+            <td style={{ position: "absolute", left: 5, right: "auto", width: "auto" }}>   <input type="checkbox" className="custom-control-input" id="same-address" /></td>
+            <td>  <label className="custom-control-label" style={{ width: "100%" }} htmlFor="same-address">
+                <span> &nbsp;&nbsp;&nbsp;&nbsp;{IndexCut(item.productName, ' ', 4)}...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
+            </label></td>
+            <td className="d-flex" style={{ position: "absolute", right: -5, left: "auto", width: "auto" }}>  <span className="ml-5 container " >
+                <button type="button" className="ml-5 btn btn-secondary btn-circle btn-sm">+</button>
+                <span> &nbsp;&nbsp;{value.cart.get(item.pid)?.quantity} &nbsp;&nbsp;</span>
+                <button type="button" className="btn btn-secondary btn-circle btn-sm">-</button>
+            </span></td>
+        </tr>);
 
-
+        // let mapToArray:Array<CartProp>=[];
+        // value.cart.forEach(ele=>mapToArray.push(ele))
     }
 
     // const renderEmpty=()=>{
@@ -151,16 +170,25 @@ const Nav: React.FC<Props> = (props: Props) => {
                                     <button type="button" onClick={handleCartClick} className="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                                            <span >
                                         <FiShoppingCart /></span>
                                         &nbsp;&nbsp;<span>Cart</span>
-                                        <span className="badge bg-dark text-white ms-1 rounded-pill">{value.cart.length}</span>
+                                        <span className="badge bg-dark text-white ms-1 rounded-pill">{value.cart.size}</span>
                                     </button>
-                                    <div className="dropdown-menu " style={{ display: cartOpen ? "block" : "none", right: 0, left: "auto", width: "auto" }}>
-                                        <div className="dropdown-menu-right ">
-                                            <form className=" dropdown-item px-4 py-3">
-                                                {value.cart.length == 0 ? <div><IoIosHeartEmpty/>&nbsp;&nbsp;Your cart is empty
-                                                </div> : renderCart()}
+                                    <div className="dropdownWide " style={{ display: cartOpen ? "block" : "none", right: 0, left: "auto", width: "auto" }}>
+                                        <div className="dropdown-menu-right   dropdown-item">
+                                            <form className=" ">
 
-                                                <div className="containter">
-                                                    <button type="submit" className="btn btn-primary mt-2 center">Checkout</button>
+                                                {value.cart.size == 0 ? <div style={{textAlign:"center"}}><IoIosHeartEmpty />&nbsp;&nbsp;Your cart is empty
+                                                </div> : <table className="table"><tbody>{renderCart()}
+
+
+                                                </tbody>
+
+                                                </table>}
+                                                <div >
+                                                    {value.cart.size == 0 ? <div></div> : <div className="d-flex center width60">
+                                                        <button type="submit" className="btn btn-primary pr-6 mr-6 mt-2 center" style={{ textAlign: "center" }}>Checkout</button>
+
+                                                    </div>}
+
                                                 </div>
                                             </form>
 
