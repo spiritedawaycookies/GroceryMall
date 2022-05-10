@@ -49,6 +49,8 @@ public enum MallExceptionEnum {
     NOT_YOUR_ORDER(10021, "Order does not belong to you"),
 
     WRONG_ORDER_STATUS(10022, "Order status does not match"),
+    NEED_NICKNAME(10023, "Nickname cannot be null"),
+
 
     SYSTEM_ERROR(20000, "System exception, please check the specific error message from the console or log");
 

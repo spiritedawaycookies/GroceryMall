@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(String userName, String password) throws MallException {
+    public void register(String userName, String password,String nickname) throws MallException {
         //查询用户名是否存在，不允许重名
         User result = userMapper.selectByName(userName);
         if (result != null) {
@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
         //写到数据库
         User user = new User();
         user.setUsername(userName);
+        user.setNickname(nickname);
         int salt = new Random().nextInt(1000) + 1000; //盐值
         user.setSalt(salt);
 

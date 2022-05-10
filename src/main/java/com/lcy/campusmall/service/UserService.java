@@ -5,7 +5,7 @@ import com.lcy.campusmall.model.pojo.User;
 
 public interface UserService {
     User getUser();
-    void register(String userName, String password) throws MallException;
+    void register(String userName, String password,String nickname) throws MallException;
     User login(String userName, String password) throws MallException;
 
     boolean checkAdminRole(User user);

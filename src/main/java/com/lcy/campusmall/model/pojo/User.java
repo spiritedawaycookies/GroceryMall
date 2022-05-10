@@ -10,6 +10,8 @@ public class User {
     private String password;
 
     private Integer salt;
+    private String nickname;
+    private String profilePic;
 
     private String postcode;
 
@@ -20,6 +22,22 @@ public class User {
     private Date createTime;
 
     private Date updateTime;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
 
     public Integer getId() {
         return id;

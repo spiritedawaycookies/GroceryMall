@@ -5,10 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppStateProvider } from './AppState';
 
-const defaultContexValue={
-  username:"lcy"
-}
-export const appContext=React.createContext(defaultContexValue)
+// const defaultContexValue={
+//   username:"lcy"
+// }
+// export const appContext=React.createContext(defaultContexValue)
 ReactDOM.render(
   <React.StrictMode>
     <AppStateProvider>

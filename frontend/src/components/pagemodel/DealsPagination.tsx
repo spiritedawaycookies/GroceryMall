@@ -17,7 +17,7 @@ interface State {
     curPage: number,
     itemsPerPage: number
 }
-const IndexPagination: React.FC<Props> = (props:Props) => {
+const DealsPagination: React.FC<Props> = (props:Props) => {
     const [currentItems, setcurrentItems] = useState<Array<CardProps>>([]);//???
     const [loading, setloading] = useState<boolean>(false);
     const [pageCount, setpageCount] = useState<number>(0);
@@ -109,4 +109,4 @@ const IndexPagination: React.FC<Props> = (props:Props) => {
 
 
 
-export default IndexPagination;
+export default DealsPagination;

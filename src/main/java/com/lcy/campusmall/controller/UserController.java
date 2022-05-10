@@ -31,10 +31,10 @@ public class UserController {
     @PostMapping("/register")
     @ResponseBody
     //参数在请求中,所以要加注解指定参数名
-    public ApiRestResponse register(@RequestParam(name="userName") String userName,
+    public ApiRestResponse register(@RequestParam(name="userName") String userName,@RequestParam(name="nickname") String nickname,
                                     @RequestParam(name="password") String password) throws MallException {
-        if (StringUtils.isEmpty(userName)) {
-            return ApiRestResponse.error(MallExceptionEnum.NEED_USER_NAME);
+        if (StringUtils.isEmpty(nickname)) {
+            return ApiRestResponse.error(MallExceptionEnum.NEED_NICKNAME);
         }
         if (StringUtils.isEmpty(password)) {
             return ApiRestResponse.error(MallExceptionEnum.NEED_PASSWORD);
@@ -43,7 +43,7 @@ public class UserController {
         if (password.length() < 8) {
             return ApiRestResponse.error(MallExceptionEnum.PASSWORD_TOO_SHORT);
         }
-        userService.register(userName, password);
+        userService.register(userName, password,nickname);
         return ApiRestResponse.success();
     }
     /**

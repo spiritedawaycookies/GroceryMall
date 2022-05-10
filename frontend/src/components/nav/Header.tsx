@@ -18,16 +18,16 @@ const Header: React.FC = () => {
             console.log("fetched");
 
 
-            console.log(data.data.list);
+         //   console.log(data.data.list);
             setloading(false);
             if (!loading) {
                 setHotwords(data.data.list);
-                console.log("hotWords");
+                // console.log("hotWords");
 
-                console.log(hotWords);
+                // console.log(hotWords);
 
 
-                console.log("loading:" + loading);
+                // console.log("loading:" + loading);
             }
 
         });
