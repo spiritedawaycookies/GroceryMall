@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { appContext, appSetStateContext } from "../AppState";
-import AddToCartBtn from './AddToCartBtn'
+//import AddToCartBtn from './AddToCartBtn2'
+import AddToCartBtn from './AddToCartBtn';
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean,quantity:number
 }

@@ -5,10 +5,10 @@ import urls from '../../constant.json';
 
 import IndexItems from "./IndexItems";
 interface CardProps {
-    id: number, name: string, image: string, price: number, sales: number, isSale: boolean,quantity:number
+    id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
 }
 interface Props {
-    itemsPage:number
+    itemsPage: number
 }
 interface State {
     currentItems: Array<CardProps>,
@@ -17,41 +17,42 @@ interface State {
     curPage: number,
     itemsPerPage: number
 }
-const IndexPagination: React.FC<Props> = (props:Props) => {
+const IndexPagination: React.FC<Props> = (props: Props) => {
     const [currentItems, setcurrentItems] = useState<Array<CardProps>>([]);//???
     const [loading, setloading] = useState<boolean>(false);
     const [pageCount, setpageCount] = useState<number>(0);
     const [curPage, setcurPage] = useState<number>(1);
     const [itemsPerPage, setitemsPerPage] = useState<number>(props.itemsPage);
-    const [err,setErr]=useState<string>();
+    const [err, setErr] = useState<string>();
 
 
     useEffect(() => {
         // Fetch items from another resources.
         // console.log(newPage);
         const fetchData = async () => {
-           try {const response = await fetch('http://localhost:8083/product/list?pageNum=' + curPage + '&pageSize=' + itemsPerPage);
-            const data = await response.json();
-           
-            console.log("fetched");
+            try {
+                const response = await fetch('http://localhost:8083/product/list?pageNum=' + curPage + '&pageSize=' + itemsPerPage);
+                const data = await response.json();
+
+                console.log("fetched");
 
 
-           // console.log(data.data.list);
-            setloading(true);
-            // if (loading) {
+                // console.log(data.data.list);
+                setloading(true);
+                // if (loading) {
                 setcurrentItems(data.data.list);
                 console.log("currentItems");
 
-              //  console.log(currentItems);
+                //  console.log(currentItems);
                 setpageCount(Math.ceil(data.data.total / itemsPerPage));
                 console.log(pageCount);
-               
-           
-            console.log(loading);
-        }catch(e:any){
-            setErr(e.message);
-        }
-            
+
+
+                console.log(loading);
+            } catch (e: any) {
+                setErr(e.message);
+            }
+
         }
         fetchData();
         setloading(false);
@@ -62,8 +63,8 @@ const IndexPagination: React.FC<Props> = (props:Props) => {
             <div>
                 < IndexItems currentItems={currentItems} />
                 <div >
-                    {!err||err!==""&&<div>Error:{err}</div>}
-                    <ReactPaginate
+                    {!err || err !== "" && <div>Error:{err}</div>}
+                    <div className='container mb-2'>  <ReactPaginate
                         nextLabel="next >"
                         onPageChange={(event) => {
                             //reactpagination是从0开始所以要+1
@@ -93,14 +94,14 @@ const IndexPagination: React.FC<Props> = (props:Props) => {
                         containerClassName="pagination"
                         activeClassName="active"
 
-                    />
+                    /></div>
                 </div>
             </div>
         );
     }
 
 
-    return loading||pageCount==0 ? <div>{renderProduct()}</div> : <div><img src="http://localhost:8083/images/loading.jpg" alt="Loading..."/></div>;
+    return loading || pageCount == 0 ? <div>{renderProduct()}</div> : <div><img src="http://localhost:8083/images/loading.jpg" alt="Loading..." /></div>;
 
 
 }

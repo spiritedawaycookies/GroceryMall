@@ -22,6 +22,10 @@ interface CartProp {
     quantity: number,
     totalPrice: number
 }
+export const IndexCut = (str: string, substr: string, idx: number) => {
+    let index = str.split(substr, idx).join(substr).length;
+    return str.substring(0, index);
+}
 const Nav: React.FC<Props> = (props: Props) => {
     const [categories, setCategories] = useState<Array<string>>(["Loading"]);
     const [getCategoriesSuccess, setGetCategoriesSuccess] = useState<boolean>(false);
@@ -66,10 +70,7 @@ const Nav: React.FC<Props> = (props: Props) => {
 
     }
 
-    const IndexCut = (str: string, substr: string, idx: number) => {
-        let index = str.split(substr, idx).join(substr).length;
-        return str.substring(0, index);
-    }
+   
 
     const renderCart = () => {
 
@@ -93,13 +94,8 @@ const Nav: React.FC<Props> = (props: Props) => {
             </span></td>
         </tr>);
 
-        // let mapToArray:Array<CartProp>=[];
-        // value.cart.forEach(ele=>mapToArray.push(ele))
+        
     }
-
-    // const renderEmpty=()=>{
-    //     if(emptyCart)
-    // }
 
 
     // componentDidMount() {

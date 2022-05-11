@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 const Footer = () => {
 
     return (
-        <footer className="bg-primary text-lg-start">
+        <footer className="bg-primary mt-5 text-lg-start">
 
 
             <hr className="m-4" />

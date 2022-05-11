@@ -1,45 +1,37 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/applogo.png"
-
+import { IndexCut } from './Nav'
 const Header: React.FC = () => {
     // const renderHotwords=()=>{
     //     return(
 
     //     )
     // }
-    const [hotWords, setHotwords] = useState<Array<{name:string}>>([])
-    const [loading, setloading] = useState<boolean>(true);
+    const [hotWords, setHotwords] = useState<Array<string>>([])
+    const [loading, setloading] = useState<boolean>(false);
     const [err, setErr] = useState<string>();
 
     useEffect(() => {
         // Fetch items from another resources.
         // console.log(newPage);
         fetch('http://localhost:8083/product/list?pageNum=1&pageSize=2&orderBy=sales desc').then(res => res.json()).then(data => {
-            console.log("fetched");
-
-
-         //   console.log(data.data.list);
-            setloading(false);
-            if (!loading) {
-                setHotwords(data.data.list);
-                // console.log("hotWords");
-
-                // console.log(hotWords);
-
-
-                // console.log("loading:" + loading);
-            }
+            console.log("fetched", data.data.list);
+            let words:Array<string>= data.data.list.map(ele=>ele.name);
+            setHotwords(words);
+            console.log("words",words);
+            
+            console.log("hotWords", hotWords);
 
         });
 
     }, []);
 
     const renderHotwords = () => {
-        if (!loading) {
+      
             //http://localhost:8083/product/detail?id=1
-            return hotWords.map(i => { return  <a href="#" className="text-muted"><li className="m-3 ">{i.name}</li> </a>}
+            return hotWords.map(i => { return <a href="#" className="text-muted"><li className="m-3 ">{IndexCut(i, ' ', 3)}...</li> </a> }
             )
-        } else return <li className="m-3 text-muted">Hot Products...</li>
+       
 
     }
 
@@ -69,7 +61,7 @@ const Header: React.FC = () => {
                             <ul id="horizontal-list" className="input-group container">
                                 <div id="renderList">
                                     {renderHotwords()}
-                                 <a href="#">   <li className="m-3">More...</li> </a>
+                                    <a href="#">   <li className="m-3">More...</li> </a>
                                 </div>
                             </ul>
                         </table>
