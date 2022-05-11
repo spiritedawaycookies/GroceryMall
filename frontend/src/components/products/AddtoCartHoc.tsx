@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { appContext, appSetStateContext } from "../AppState";
+import { appContext, appSetStateContext } from "../../AppState";
 import {BTNProps} from './AddToCartBtn';
 
 export const withAddToCart = (ChildComponent: React.ComponentType<BTNProps>) => {

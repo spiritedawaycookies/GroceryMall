@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/applogo.png"
 import { IndexCut } from './Nav'
-import {Layout} from 'antd';
+import {Layout,Typography} from 'antd';
 const Header: React.FC = () => {
     // const renderHotwords=()=>{
     //     return(
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
 
     return (
 <>
-{/* <Layout.Header></Layout.Header> */}
+
         <header className="py-5 bg-light">
             <div className=" ">
                 <div className="d-flex flex-wrap center ">

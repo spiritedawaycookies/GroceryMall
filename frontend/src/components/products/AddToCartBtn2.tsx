@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { idText } from 'typescript';
-import { appContext, appSetStateContext } from "../AppState";
+import { appContext, appSetStateContext } from "../../AppState";
 
 interface BTNProps {
     pid: number,

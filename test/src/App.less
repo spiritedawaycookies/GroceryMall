@@ -1,0 +1,110 @@
+.App {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.app-header {
+  background-color: white !important;
+}
+@disabled:rgba(255, 255, 255, 0.089);
+@white:    #fff !important;
+@gray-100: #f8f9fa !important;
+@gray-200: #f7f7f9 !important;
+@gray-300: #eceeef !important;
+@gray-400: #ced4da !important;
+@gray-500: #aaa !important;
+@gray-600: #888 !important;
+@gray-700: #5a5a5a !important;
+@gray-800: #343a40 !important;
+@gray-900: #212529 !important;
+@black:    #000 !important;
+
+@blue:    #007bff !important;
+@indigo:  #6610f2 !important;
+@purple:  #6f42c1 !important;
+@pink:    #e83e8c !important;
+@red:     #ff7851 !important;
+@orange:  #fd7e14 !important;
+@yellow:  #ffce67 !important;
+@green:   #56cc9d !important;
+@teal:    #20c997 !important;
+@cyan:    #6cc3d5 !important; 
+.top-header {
+  height: 40px;
+  padding-left: 4%;
+  padding-right: 4%;
+  display: block;
+  background-color: #f5f5f5;
+  line-height: 40px;
+}
+
+.top-header .inner {
+  width: 88%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button-group {
+  float: right;
+  margin-top: 5px;
+}
+
+.main-header {
+  background-color: white !important;
+  height: 60px;
+  line-height: 60px;
+  width: 88%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.App-logo {
+  height: 60px;
+  width: 60px;
+  float: left;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.title {
+  line-height: 64px !important;
+  display: inline;
+  color: @primary-color !important;
+}
+
+.search-input {
+  width: 400px !important;
+  line-height: 64px;
+  margin-top: 17px;
+  margin-left: 37px;
+}
+
+.main-menu {
+  padding-left: 6% !important;
+  padding-right: 6% !important;
+  background-color: @primary-color !important;
+  color: @white !important;
+}
+.ant-menu-item-selected {
+  background-color: @white;
+  color: @primary-color !important;
+
+} 
+.ant-menu-item-active {
+  background-color: @disabled!important;
+  color: @white  !important;
+
+}
+@import '~antd/dist/antd.less';
