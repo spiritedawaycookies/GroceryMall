@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import React from 'react';
 import "bootswatch/dist/minty/bootstrap.min.css";
-import styles from './App.module.css';
+import './App.module.less';
 import Footer from './components/footer/Footer';
 import Nav from './components/nav/Nav';
 import Header from './components/nav/Header';
