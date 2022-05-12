@@ -61,9 +61,9 @@ const Header: React.FC = () => {
                         </div>
                         <table className="input-group m-2 width85 ">
                             <ul id="horizontal-list" className="input-group container">
-                                <div id="renderList">
+                                <div id="renderList" className="d-flex">
                                     {renderHotwords()}
-                                    <a href="#">   <li className="m-3">More...</li> </a>
+                                    <a style={{justifyContent:'flex-start'}} href="#">   <li className="m-3">More...</li> </a>
                                 </div>
                             </ul>
                         </table>

@@ -20,18 +20,18 @@ interface CartProp {
 //     }
 // }
 interface AppStateValue {
-    username: string,
-    nickname: string,
-    profilePic: string,
+    username: string|undefined,
+    nickname: string|undefined,
+    profilePic: string|undefined,
     cart: Map<number,CartProp>
      
     // addOnetoCart:()=>{}
 
 }
 const defaultContexValue: AppStateValue = {
-    username: "lcy@lcy",
-    nickname: 'lcy',
-    profilePic: 'https://i.natgeofe.com/n/46b07b5e-1264-42e1-ae4b-8a021226e2d0/domestic-cat_thumb_square.jpg',
+    username: undefined,
+    nickname: undefined,
+    profilePic: undefined,
     cart:  
         new Map()
     }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import axios from 'axios';
-import urls from '../../constant.json';
-
+import urls from '../../../constant.json';
+import {Divider,Typography} from 'antd'
 import IndexItems from "./IndexItems";
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
@@ -31,7 +31,7 @@ const IndexPagination: React.FC<Props> = (props: Props) => {
         // console.log(newPage);
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8083/product/list?pageNum=' + curPage + '&pageSize=' + itemsPerPage);
+                const response = await fetch('http://localhost:8083/product/list?pageNum=' + curPage + '&pageSize=' + itemsPerPage+"&orderBy=sales desc");
                 const data = await response.json();
 
                 console.log("fetched");
@@ -61,6 +61,7 @@ const IndexPagination: React.FC<Props> = (props: Props) => {
     const renderProduct = () => {
         return (
             <div>
+                <Divider orientation="center" style={{textAlign:'center',justifyContent:"center"}} ><h2 style={{textAlign:'center'}}className='text-muted center'>Hot Products</h2></Divider>
                 < IndexItems currentItems={currentItems} />
                 <div >
                     {!err || err !== "" && <div>Error:{err}</div>}

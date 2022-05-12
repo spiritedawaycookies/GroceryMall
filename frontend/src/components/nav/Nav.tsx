@@ -4,19 +4,14 @@ import { IoIosHeartEmpty } from 'react-icons/io'
 import { appContext, appSetStateContext } from "../../AppState";
 import styles from './nav.module.css'
 // import UserService from "../../services/UserService";
-import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link,Outlet, Routes } from 'react-router-dom';
 // import Login from '../main/Login'
 // import CategoryService from '../../services/CategoryService'
 
 interface Props {
-    username: string
+  
 }
-// interface State {
-//     categories: Array<string>
-//     getCategoriesSuccess: boolean,
-//     activeItem: string,
-//     isOpen: boolean
-// }
+
 interface CartProp {
     productName: string,
     quantity: number,
@@ -123,16 +118,16 @@ const Nav: React.FC<Props> = (props: Props) => {
     return (
         <>
 
-            <nav className="py-0 border-bottom bg-primary">
+            <nav className="border-bottom bg-primary">
 
                 <div className="center">
                     <div className=" d-flex flex-wrap">
                         <ul className="nav me-auto">
 
-
-                            <li className="nav-item"><a className="nav-link link-light px-2 active" aria-current="page">Home</a></li>
+                        <Link to="/">
+                            <li className="nav-item"><a className="nav-link link-light px-2 active" aria-current="page">Home</a></li></Link>
                             <li className="nav-item dropdown">
-                                <a onClick={handleCategoryClick} className="nav-link link-dark dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a onClick={handleCategoryClick} className="nav-link link-dark dropdown-toggle fw-bold" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <span> Categories</span>
                                 </a>
                                 <div id="dropdown-menu" className="dropdown-menu" style={{ display: isOpen ? "block" : "none" }}>
@@ -143,24 +138,25 @@ const Nav: React.FC<Props> = (props: Props) => {
                                     <a className="dropdown-item" >Separated link</a>
                                 </div>
                             </li>
-                            <li className="nav-item"><a href="#" className="nav-link link-light px-2">Best Sellers</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link link-light px-2">Deals</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link link-light px-2">About</a></li>
+                            <li className="nav-item"><a  className="nav-link link-light px-2">Best Sellers</a></li>
+                            <li className="nav-item"><a  className="nav-link link-light px-2">Deals</a></li>
+                            <li className="nav-item"><a  className="nav-link link-light px-2">About</a></li>
                         </ul>
                         <ul className="nav">
 
-                            {/* <li className="nav-item">{props.username || props.username !== "" ? <a href="#" className="nav-link link-dark px-2"> <span><RiUserSmileFill /></span> {props.username}</a> : <a className="nav-link link-dark px-2">Login</a>}</li> */}
                             <li className="nav-item">
-                                {value.nickname || value.nickname !== "" ?
-                                    <a href="#" className="nav-link link-dark px-2">
+                                {value.username===undefined || value.username == "" ?
+                              <Link to='/login'> <a className="nav-link link-dark px-2 fw-bold">&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</a></Link> 
+                              :
+                                    <a  className="nav-link link-dark px-2">
                                         <span className="border border-primary">
                                             <img width="30px" className="img-thumbnail rounded-circle" src={value.profilePic} />
-                                        </span>&nbsp;&nbsp;{value.nickname}&nbsp;&nbsp;</a> :
-                                    <a className="nav-link link-dark px-2">&nbsp;&nbsp;Login&nbsp;&nbsp;</a>}
+                                        </span>&nbsp;&nbsp;{value.nickname}&nbsp;&nbsp;</a> 
+                                    }
                             </li>
 
                             {/* 购物车 */}
-                            <div className="nav-item">
+                            <div className="nav-item mr-5" style={{position:'relative',right:'10px'}} >
 
                                 <li className="nav-item dropdown">
                                     <button type="button" onClick={handleCartClick} className="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                                            <span >
@@ -200,7 +196,7 @@ const Nav: React.FC<Props> = (props: Props) => {
                     </div>
                 </div>
             </nav>
-
+            <Outlet />
         </>
 
     );

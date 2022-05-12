@@ -54,6 +54,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
+    "@types/react-router-dom": "^5.3.3",
     "babel-loader": "^8.2.5",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^7.5.0",

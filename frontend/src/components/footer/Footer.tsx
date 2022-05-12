@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 const Footer = () => {
 
     return (
-        <footer className="bg-primary mt-5 text-lg-start">
-
-
-            <hr className="m-4" />
+        <footer  className="bg-primary  text-lg-start"
+        
+        >
+     
 
             <div className="text-center text-dark py-4 align-items-center">
                 <p>Follow me on social media</p>
