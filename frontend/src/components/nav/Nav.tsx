@@ -4,7 +4,7 @@ import { IoIosHeartEmpty } from 'react-icons/io'
 import { appContext, appSetStateContext } from "../../AppState";
 import styles from './nav.module.css'
 // import UserService from "../../services/UserService";
-import { BrowserRouter as Router, Route, Link,Outlet, Routes } from 'react-router-dom';
+import { Link,Outlet,useNavigate,useLocation  } from 'react-router-dom';
 // import Login from '../main/Login'
 // import CategoryService from '../../services/CategoryService'
 
@@ -29,6 +29,7 @@ const Nav: React.FC<Props> = (props: Props) => {
     const [cartOpen, setCartOpen] = useState<boolean>(false);
     const value = useContext(appContext)
     const setState = useContext(appSetStateContext);
+    let navigate=useNavigate();
     useEffect(() => {
         //每次ui渲染或者状态改变useEffect都会执行（默认），第二个参数是调用时机是一个状态列表（比如state）,如果状态列表变化就会执行
         //如果是一个[]就是类似componentDidMount在挂载组件时调用一次 此时调用api可以
@@ -65,7 +66,10 @@ const Nav: React.FC<Props> = (props: Props) => {
 
     }
 
-   
+   const handleDealsClick=(e:any)=>{
+       e.preventDefault();
+       navigate('deals');
+   }
 
     const renderCart = () => {
 
@@ -139,7 +143,7 @@ const Nav: React.FC<Props> = (props: Props) => {
                                 </div>
                             </li>
                             <li className="nav-item"><a  className="nav-link link-light px-2">Best Sellers</a></li>
-                            <li className="nav-item"><a  className="nav-link link-light px-2">Deals</a></li>
+                            <li className="nav-item"><a onClick={handleDealsClick} className="nav-link link-light px-2">Deals</a></li>
                             <li className="nav-item"><a  className="nav-link link-light px-2">About</a></li>
                         </ul>
                         <ul className="nav">

@@ -41,13 +41,13 @@ function Login() {
     return (
         <div>
             <section className="vh-100" 
-            style={{ backgroundSize: '100%',backgroundRepeat:'no-repeat', backgroundImage: 'url("'+Constant[0].backendUrl+'/images/background2.jpg")'}} >
+            style={{ backgroundSize: '100%',backgroundRepeat:'no-repeat', backgroundImage: 'url("'+Constant[0].backendUrl+'/images/background1.jpg")'}} >
                  <div className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
                             <div className="card text-black" style={{ borderRadius: "25px" }}>
                                 <div className="card-body p-md-5">
-                                    <div className="row justify-content-center">
+                                    <div className="row justify-content-center md-5 pd-5" style={{position:'relative',bottom:'20px'}}>
                                         <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 justify-content-left">
                                             <div style={{position:'relative',right:"-50px",bottom:'-40px'}} >
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -68,7 +68,7 @@ function Login() {
                                                     </svg>                                        </button>
                                             </div>
                                         </div>
-                                        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                                        <div class="col-md-8 col-lg-6 col-xl-4" style={{position:'relative',left:'-20px'}}>
                                             <form onSubmit={handleSubmit}>
                                                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                                                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign in<br></br></p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCard from '../products/ProductCard';
+import ProductCard from '../../products/ProductCard';
 interface Props {
     currentItems: Array<CardProps>
 }
@@ -16,7 +16,7 @@ const IndexItems: React.FC<Props> = (props:Props) => {
                 <div className="row justify-content-center">
 
                     {props.currentItems && props.currentItems.map(((item) => (
-                        (item.id)%3===0&&
+                        
                         <ProductCard
                         id={item.id}
                         name={item.name}
