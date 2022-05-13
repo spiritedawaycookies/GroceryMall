@@ -1,0 +1,54 @@
+
+.center {
+    margin: auto !important;
+    width: 100%;
+    
+    padding: 10px !important;
+    }
+
+.widthEight{
+    width: 80%!important;
+}
+
+.widthNine{
+    width: 90%!important;
+}
+.width85{
+    width: 85%!important;
+}
+.width87{
+    width: 87%!important;
+}
+.width130{
+    width: 130%!important;
+}
+.width110{
+    width: 110%!important;
+}
+.heigh80{
+    padding: 20px !important;
+    height: 80% !important;
+}
+
+#menu-outer {
+	height: 84px;
+	
+}
+
+.table {
+	display: table;  
+	margin: 0 auto;
+}
+
+ul#horizontal-list {
+	min-width: 300px;
+	list-style: none;
+	padding: 10px;
+	}
+	ul#horizontal-list li {
+		display: inline;
+	}
+
+.pagination{
+    justify-content: center;
+}

@@ -1,0 +1,7 @@
+.side-menu {
+    width: 400px;
+    height:400px;
+    position:relative;
+    left: 20px;
+    border: 5px solid #78c2ad !important;
+}
