@@ -91,3 +91,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+**/bootstrap.css
+**/bootstrap.min.css
+**/bootstrap_white.css
+
