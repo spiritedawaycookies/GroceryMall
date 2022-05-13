@@ -142,7 +142,6 @@ const Nav: React.FC<Props> = (props: Props) => {
                                     <a className="dropdown-item" >Separated link</a>
                                 </div>
                             </li>
-                            <li className="nav-item"><a  className="nav-link link-light px-2">Best Sellers</a></li>
                             <li className="nav-item"><a onClick={handleDealsClick} className="nav-link link-light px-2">Deals</a></li>
                             <li className="nav-item"><a  className="nav-link link-light px-2">About</a></li>
                         </ul>

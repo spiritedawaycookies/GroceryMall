@@ -5,7 +5,7 @@ const Register: React.FC = (props) => {
         <>
             <div>
             <section className="vh-100" 
-            style={{ backgroundSize: '100%',backgroundRepeat:'no-repeat', backgroundImage: 'url("'+Constant[0].backendUrl+'/images/background2.jpg")'}} >
+            style={{ minHeight:'800px',backgroundSize: '100%',backgroundRepeat:'no-repeat', backgroundImage: 'url("'+Constant[0].backendUrl+'/images/background2.jpg")'}} >
                  <div className="container h-100">
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col-lg-12 col-xl-11">

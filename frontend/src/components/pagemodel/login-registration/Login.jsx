@@ -41,7 +41,7 @@ function Login() {
     return (
         <div>
             <section className="vh-100" 
-            style={{ backgroundSize: '100%',backgroundRepeat:'no-repeat', backgroundImage: 'url("'+Constant[0].backendUrl+'/images/background1.jpg")'}} >
+            style={{ minHeight:'800px',backgroundSize: '100%',backgroundRepeat:'no-repeat', backgroundImage: 'url("'+Constant[0].backendUrl+'/images/background1.jpg")'}} >
                  <div className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
