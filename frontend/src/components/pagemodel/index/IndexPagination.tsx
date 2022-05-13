@@ -4,6 +4,7 @@ import axios from 'axios';
 import urls from '../../../constant.json';
 import {Divider,Typography} from 'antd'
 import IndexItems from "./IndexItems";
+import {useTranslation} from "react-i18next"
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
 }
@@ -24,7 +25,7 @@ const IndexPagination: React.FC<Props> = (props: Props) => {
     const [curPage, setcurPage] = useState<number>(1);
     const [itemsPerPage, setitemsPerPage] = useState<number>(props.itemsPage);
     const [err, setErr] = useState<string>();
-
+    const {t}=useTranslation();
 
     useEffect(() => {
         // Fetch items from another resources.
@@ -61,7 +62,7 @@ const IndexPagination: React.FC<Props> = (props: Props) => {
     const renderProduct = () => {
         return (
             <div>
-                <Divider orientation="center" style={{textAlign:'center',justifyContent:"center"}} ><h2 style={{textAlign:'center'}}className='text-muted center'>Hot Products</h2></Divider>
+                <Divider orientation="center" style={{textAlign:'center',justifyContent:"center"}} ><h2 style={{textAlign:'center'}}className='text-muted center'>{t('main.hot_products')}</h2></Divider>
                 < IndexItems currentItems={currentItems} />
                 <div >
                     {!err || err !== "" && <div>Error:{err}</div>}
@@ -71,7 +72,7 @@ const IndexPagination: React.FC<Props> = (props: Props) => {
                             //reactpagination是从0开始所以要+1
                             const newPage = event.selected + 1;
                             // console.log(newPage);
-                            axios.get('http://localhost:8083/product/list?pageNum=' + newPage + '&pageSize=' + itemsPerPage).then(res => {
+                            axios.get('http://localhost:8083/product/list?pageNum=' + newPage + '&pageSize=' + itemsPerPage+"&orderBy=sales desc").then(res => {
                                 //     this.setState({ curPage: newPage, currentItems: res.data.data.list });
                                 setcurPage(newPage);
                                 setcurrentItems(res.data.data.list);

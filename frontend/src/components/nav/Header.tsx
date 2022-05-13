@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/applogo.png"
 import { IndexCut } from './Nav'
 import {Layout,Typography} from 'antd';
+import {useTranslation} from 'react-i18next'
 const Header: React.FC = () => {
     // const renderHotwords=()=>{
     //     return(
 
     //     )
     // }
+    const{t}=useTranslation();
     const [hotWords, setHotwords] = useState<Array<string>>([])
     const [loading, setloading] = useState<boolean>(false);
     const [err, setErr] = useState<string>();
@@ -57,13 +59,13 @@ const Header: React.FC = () => {
                                 </svg>
                             </span>
 
-                            <input type="text" className="form-control " placeholder="Search..." aria-label="Input group example" aria-describedby="basic-addon1" />
+                            <input type="text" className="form-control " placeholder={t('main.search_dot')} aria-label="Input group example" aria-describedby="basic-addon1" />
                         </div>
                         <table className="input-group m-2 width85 ">
                             <ul id="horizontal-list" className="input-group container">
                                 <div id="renderList" className="d-flex">
                                     {renderHotwords()}
-                                    <a style={{justifyContent:'flex-start'}} href="#">   <li className="m-3">More...</li> </a>
+                                    <a style={{justifyContent:'flex-start'}} href="#">   <li className="m-3">{t('main.more')}...</li> </a>
                                 </div>
                             </ul>
                         </table>

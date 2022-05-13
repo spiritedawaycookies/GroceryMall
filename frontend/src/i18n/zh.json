@@ -1,0 +1,72 @@
+{
+    "header": {
+        "slogan": "最佳生鲜网站",
+        "add_new_language": "添加新语言",
+        "title": "Ace 生鲜",
+        "register":"注册",
+        "login":"登陆",
+        "home_page": "首页",
+        "categories":"分类",
+        "deals": "折扣",
+        "about": "关于我们 | 商务合作",
+        "cart": "购物车",
+        "private": "私家团",
+        "cruise": "邮轮",
+        "hotel": "酒店+景点",
+        "local": "当地玩乐",
+        "theme": "主题游",
+        "custom": "定制游",
+        "study": "游学",
+        "visa":"签证",
+        "enterprise":"企业游",
+        "high_end":"高端游",
+        "outdoor":"爱玩户外",
+        "insurance":"保险"
+    },
+    "main": {
+        "add_cart":"加入购物车",
+        "cart_empty":"您的购物车是空的",
+        "loading":"载入中",
+        "checkout":"结算",
+        "more":"更多",
+        "search_dot":"搜索...",
+        "hot_products":"热销好货",
+        "sales":"销量"
+
+
+    },
+    "footer": {
+        "copyright" : "版权所有 2022 ©",
+        "quick_links":"快速导航",
+        "news_letter":"订阅",
+        "social_media":"关注我们"
+
+
+
+    },
+    "side_menu": {
+        "fresh_fruit": "新鲜水果",
+        "sea_food": "海鲜鱼产",
+        "meats": "优质肉类",
+        "frozen_food": "冷冻食品",
+        "produce": "精品生鲜",
+        "hotpot":"火锅食品",
+        "mushrooms":"营养菌菇",
+        "oranges":"橙子橘子",
+        "jelly_oranges":"果冻橙",
+        "strawberries":"草莓",
+        "kiwi":"奇异果",
+        "cherries":"樱桃",
+        "other_fruits":"其他水果",
+        "crabs":"螃蟹",
+        "fishes":"鱼类",
+        "sea_cucumbers":"海参",
+        "beef_lamb":"牛肉羊肉",
+        "duck":"鸭货",
+        "chicken":"鸡肉",
+        "ice_creams":"冰淇淋",
+        "vegetables":"新鲜蔬菜"
+
+
+    }
+}

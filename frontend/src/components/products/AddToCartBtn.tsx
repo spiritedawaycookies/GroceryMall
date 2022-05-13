@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { idText } from 'typescript';
 import { appContext, appSetStateContext } from "../../AppState";
 import {withAddToCart} from './AddtoCartHoc'
+import {useTranslation} from 'react-i18next'
 export interface BTNProps {
     pid: number,
     productName:string,
@@ -10,6 +11,7 @@ export interface BTNProps {
 }
 
 const AddToCartBtn:React.FC<BTNProps>=({ pid, productName, price,addToCart })=> {
+    const {t}=useTranslation();
     const value = useContext(appContext)
     const stState = useContext(appSetStateContext);
     let found = value.cart.get(pid);
@@ -28,7 +30,7 @@ const AddToCartBtn:React.FC<BTNProps>=({ pid, productName, price,addToCart })=> 
     return <>
         <div className="text-center">
             <button className="btn btn-outline-dark mt-auto" onClick={()=>addToCart(pid,productName, price)} >
-                Add to cart</button></div>
+                {t('main.add_cart')}</button></div>
 
     </>;
 }

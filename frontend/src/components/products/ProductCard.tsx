@@ -2,13 +2,14 @@ import React, { useContext, useState } from 'react';
 import { appContext, appSetStateContext } from "../../AppState";
 import { Link } from 'react-router-dom'
 import AddToCartBtn from './AddToCartBtn';
+import{useTranslation} from 'react-i18next'
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
 }
 const ProductCard: React.FC<CardProps> = (props: CardProps) => {
     let originprice = Math.floor(props.price * 1.1) / 100;
     //    console.log(props.isSale);
-
+     const {t}=useTranslation();
     return (
         <div className="col my-3 mx-2 px-1">
 
@@ -39,7 +40,7 @@ const ProductCard: React.FC<CardProps> = (props: CardProps) => {
                         price={props.price}
                     />
                     <div style={{ bottom: "1rem", right: "1rem" }} className=' position-absolute'> <small className=" text-muted">
-                        sales: {props.sales}
+                        {t('main.sales')}: {props.sales}
                     </small>
                     </div>
                 </div>

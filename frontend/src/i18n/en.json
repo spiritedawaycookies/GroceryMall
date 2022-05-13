@@ -1,0 +1,66 @@
+{
+    "header": {
+        "slogan": "The Best Grocery",
+        "add_new_language": "add new language",
+        "title": "Ace Grocery",
+        "register":"Register",
+        "login":"Login",
+        "home_page": "Home",
+        "categories":"Categories",
+        "deals": "Deals",
+        "about": "About",
+        "cart": "Cart",
+        "private": "Private",
+        "cruise": "Cruise",
+        "hotel": "Hotel & Attractions",
+        "local": "Local",
+        "theme": "Theme",
+        "custom": "Custom",
+        "study": "Study",
+        "visa":"Visa",
+        "enterprise":"Enterprise",
+        "high_end":"High-end",
+        "outdoor":"Outdoor",
+        "insurance":"Insurance"
+    },
+   "main": {
+       "add_cart":"Add to cart",
+       "cart_empty":"Your cart is empty",
+       "loading":"Loading",
+       "checkout":"Check out",
+       "more":"More",
+       "search_dot":"Search...",
+       "hot_products":"Hot Products",
+       "sales":"Sales"
+
+   },
+    "footer": {
+        "copyright" : "All rights reserved 2022 ©",
+        "quick_links":"Quick links",
+        "news_letter":"Newsletter",
+        "social_media":"Social media"
+    },
+    "side_menu": {
+        "fresh_fruit": "Fresh fruit",
+        "sea_food": "Sea food and fishes",
+        "meats": "Meats",
+        "frozen_food": "Frozen food",
+        "produce": "Produce",
+        "hotpot":"Hotpot food",
+        "mushrooms":"Mushrooms",
+        "oranges":"Oranges and tangerines",
+        "jelly_oranges":"Jelly oranges",
+        "strawberries":"Strawberries",
+        "kiwi":"Kiwi",
+        "cherries":"Cherries",
+        "other_fruits":"Other fruits",
+        "crabs":"Crabs",
+        "fishes":"Fishes",
+        "sea_cucumbers":"Sea cucumbers",
+        "beef_lamb":"Beef and lamb",
+        "duck":"Duck products",
+        "chicken":"Chicken",
+        "ice_creams":"Ice creams",
+        "vegetables":"Vegetables"
+    }
+}

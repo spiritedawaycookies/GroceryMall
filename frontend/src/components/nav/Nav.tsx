@@ -7,7 +7,7 @@ import styles from './nav.module.css'
 import { Link,Outlet,useNavigate,useLocation  } from 'react-router-dom';
 // import Login from '../main/Login'
 // import CategoryService from '../../services/CategoryService'
-
+import {useTranslation} from 'react-i18next'
 interface Props {
   
 }
@@ -22,6 +22,7 @@ export const IndexCut = (str: string, substr: string, idx: number) => {
     return str.substring(0, index);
 }
 const Nav: React.FC<Props> = (props: Props) => {
+    const {t}=useTranslation();
     const [categories, setCategories] = useState<Array<string>>(["Loading"]);
     const [getCategoriesSuccess, setGetCategoriesSuccess] = useState<boolean>(false);
     const [activeItem, setActiveItem] = useState<string>("");
@@ -114,7 +115,7 @@ const Nav: React.FC<Props> = (props: Props) => {
 
             return categories.map(d => { return <a className="dropdown-item">{d}</a> });
         }
-        else return <a className="dropdown-item">Loading</a>
+        else return <a className="dropdown-item">{t('main.loading')}</a>
 
     }
 
@@ -129,10 +130,10 @@ const Nav: React.FC<Props> = (props: Props) => {
                         <ul className="nav me-auto">
 
                         <Link to="/">
-                            <li className="nav-item"><a className="nav-link link-light px-2 active" aria-current="page">Home</a></li></Link>
+                            <li className="nav-item"><a className="nav-link link-light px-2 active" aria-current="page">{t('header.home_page')}</a></li></Link>
                             <li className="nav-item dropdown">
                                 <a onClick={handleCategoryClick} className="nav-link link-dark dropdown-toggle fw-bold" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <span> Categories</span>
+                                    <span> {t('header.categories')}</span>
                                 </a>
                                 <div id="dropdown-menu" className="dropdown-menu" style={{ display: isOpen ? "block" : "none" }}>
                                     <div>
@@ -142,14 +143,14 @@ const Nav: React.FC<Props> = (props: Props) => {
                                     <a className="dropdown-item" >Separated link</a>
                                 </div>
                             </li>
-                            <li className="nav-item"><a onClick={handleDealsClick} className="nav-link link-light px-2">Deals</a></li>
-                            <li className="nav-item"><a  className="nav-link link-light px-2">About</a></li>
+                            <li className="nav-item"><a onClick={handleDealsClick} className="nav-link link-light px-2">{t('header.deals')}</a></li>
+                            <li className="nav-item"><a  className="nav-link link-light px-2">{t('header.about')}</a></li>
                         </ul>
                         <ul className="nav">
 
                             <li className="nav-item">
                                 {value.username===undefined || value.username == "" ?
-                              <Link to='/login'> <a className="nav-link link-dark px-2 fw-bold">&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</a></Link> 
+                              <Link to='/login'> <a className="nav-link link-dark px-2 fw-bold">&nbsp;&nbsp;{t('header.login')}&nbsp;&nbsp;&nbsp;&nbsp;</a></Link> 
                               :
                                     <a  className="nav-link link-dark px-2">
                                         <span className="border border-primary">
@@ -164,14 +165,14 @@ const Nav: React.FC<Props> = (props: Props) => {
                                 <li className="nav-item dropdown">
                                     <button type="button" onClick={handleCartClick} className="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                                            <span >
                                         <FiShoppingCart /></span>
-                                        &nbsp;&nbsp;<span>Cart</span>
+                                        &nbsp;&nbsp;<span>{t('header.cart')}</span>
                                         <span className="badge bg-dark text-white ms-1 rounded-pill">{value.cart.size}</span>
                                     </button>
                                     <div className="dropdownWide " style={{ display: cartOpen ? "block" : "none", right: 0, left: "auto", width: "auto" }}>
                                         <div className="dropdown-menu-right   dropdown-item">
                                             <form className=" ">
 
-                                                {value.cart.size == 0 ? <div style={{textAlign:"center"}}><IoIosHeartEmpty />&nbsp;&nbsp;Your cart is empty
+                                                {value.cart.size == 0 ? <div style={{textAlign:"center"}}><IoIosHeartEmpty />&nbsp;&nbsp;{t('main.cart_empty')}
                                                 </div> : <table className="table"><tbody>{renderCart()}
 
 
@@ -180,7 +181,7 @@ const Nav: React.FC<Props> = (props: Props) => {
                                                 </table>}
                                                 <div >
                                                     {value.cart.size == 0 ? <div></div> : <div className="d-flex center width60">
-                                                        <button type="submit" className="btn btn-primary pr-6 mr-6 mt-2 center" style={{ textAlign: "center" }}>Checkout</button>
+                                                        <button type="submit" className="btn btn-primary pr-6 mr-6 mt-2 center" style={{ textAlign: "center" }}>{t('main.checkout')}</button>
 
                                                     </div>}
 

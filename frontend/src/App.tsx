@@ -2,15 +2,10 @@ import logo from './logo.svg';
 import React from 'react';
 import "bootswatch/dist/minty/bootstrap.min.css";
 import './App.less';
-import Footer from './components/footer/Footer';
+import {Footer} from './components/footer/Footer';
 import Nav from './components/nav/Nav';
-import Header from './components/nav/Header';
-import Carousel from './components/carousel/Carousel';
-import SideMenu from './components/sideMenu/SideMenu';
-import { Row, Col, Typography } from "antd";
 import Login from './components/pagemodel/login-registration/Login'
-import IndexPagination from './components/pagemodel/index/IndexPagination';
-import sideImage from './assets/images/guodongcheng.jpg'
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Index from './components/pagemodel/index/Index';
 import Register from './components/pagemodel/login-registration/Register';
