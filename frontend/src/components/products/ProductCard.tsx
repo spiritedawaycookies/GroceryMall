@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { appContext, appSetStateContext } from "../../AppState";
 import { Link } from 'react-router-dom'
-import AddToCartBtn from './AddToCartBtn';
+import AddToCartBtn from './AddToCartBtn2';
 import{useTranslation} from 'react-i18next'
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number

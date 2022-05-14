@@ -4,6 +4,7 @@ import axios from 'axios';
 import urls from '../../../constant.json';
 import {Divider,Typography} from 'antd'
 import DicountItems from './DiscountItems'
+import { PropsWithChildren } from 'react';
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
 }
@@ -17,6 +18,26 @@ interface State {
     curPage: number,
     itemsPerPage: number
 }
+const ReactPaginateFixed = ReactPaginate as unknown as React.FC<PropsWithChildren<{
+    onPageChange: any,
+    nextLabel: any,
+    pageRangeDisplayed :any,
+marginPagesDisplayed :any,
+pageCount:any,
+previousLabel :any,
+pageClassName :any,
+pageLinkClassName :any,
+previousClassName :any,
+previousLinkClassName :any,
+nextClassName :any,
+nextLinkClassName :any,
+breakLabel :any,
+breakClassName :any,
+breakLinkClassName :any,
+containerClassName :any,
+activeClassName :any,
+
+}>>
 const DiscountPagination: React.FC<Props> = (props: Props) => {
     const [currentItems, setcurrentItems] = useState<Array<CardProps>>([]);//???
     const [loading, setloading] = useState<boolean>(false);
@@ -66,7 +87,7 @@ const DiscountPagination: React.FC<Props> = (props: Props) => {
                 < DicountItems currentItems={currentItems} />
                 <div >
                     {!err || err !== "" && <div>Error:{err}</div>}
-                    <div className='container mb-2'>  <ReactPaginate
+                    <div className='container mb-2'>  <ReactPaginateFixed
                         nextLabel="next >"
                         onPageChange={(event) => {
                             //reactpagination是从0开始所以要+1

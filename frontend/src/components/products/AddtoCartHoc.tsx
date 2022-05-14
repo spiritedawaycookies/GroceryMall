@@ -39,7 +39,8 @@ export const withAddToCart = (ChildComponent: React.ComponentType<BTNProps>) => 
         }
       
 
-
-        return <ChildComponent {...props} addToCart={addToCart}/>
+        return undefined;
+        //这一行老是type报错没办法解决就弃用了
+        // return <ChildComponent {...props} addToCart={addToCart}/>
     }
 }

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 import urls from '../../../constant.json';
-import {Divider,Typography} from 'antd'
+import { Divider, Typography } from 'antd'
 import IndexItems from "./IndexItems";
-import {useTranslation} from "react-i18next"
+import { useTranslation } from "react-i18next"
+import { PropsWithChildren } from 'react';
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
 }
@@ -18,6 +19,26 @@ interface State {
     curPage: number,
     itemsPerPage: number
 }
+const ReactPaginateFixed = ReactPaginate as unknown as React.FC<PropsWithChildren<{
+    onPageChange: any,
+    nextLabel: any,
+    pageRangeDisplayed :any,
+marginPagesDisplayed :any,
+pageCount:any,
+previousLabel :any,
+pageClassName :any,
+pageLinkClassName :any,
+previousClassName :any,
+previousLinkClassName :any,
+nextClassName :any,
+nextLinkClassName :any,
+breakLabel :any,
+breakClassName :any,
+breakLinkClassName :any,
+containerClassName :any,
+activeClassName :any,
+
+}>>
 const IndexPagination: React.FC<Props> = (props: Props) => {
     const [currentItems, setcurrentItems] = useState<Array<CardProps>>([]);//???
     const [loading, setloading] = useState<boolean>(false);
@@ -25,14 +46,14 @@ const IndexPagination: React.FC<Props> = (props: Props) => {
     const [curPage, setcurPage] = useState<number>(1);
     const [itemsPerPage, setitemsPerPage] = useState<number>(props.itemsPage);
     const [err, setErr] = useState<string>();
-    const {t}=useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         // Fetch items from another resources.
         // console.log(newPage);
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8083/product/list?pageNum=' + curPage + '&pageSize=' + itemsPerPage+"&orderBy=sales desc");
+                const response = await fetch('http://localhost:8083/product/list?pageNum=' + curPage + '&pageSize=' + itemsPerPage + "&orderBy=sales desc");
                 const data = await response.json();
 
                 console.log("fetched");
@@ -62,17 +83,17 @@ const IndexPagination: React.FC<Props> = (props: Props) => {
     const renderProduct = () => {
         return (
             <div>
-                <Divider orientation="center" style={{textAlign:'center',justifyContent:"center"}} ><h2 style={{textAlign:'center'}}className='text-muted center'>{t('main.hot_products')}</h2></Divider>
+                <Divider orientation="center" style={{ textAlign: 'center', justifyContent: "center" }} ><h2 style={{ textAlign: 'center' }} className='text-muted center'>{t('main.hot_products')}</h2></Divider>
                 < IndexItems currentItems={currentItems} />
                 <div >
                     {!err || err !== "" && <div>Error:{err}</div>}
-                    <div className='container mb-2'>  <ReactPaginate
+                    <div className='container mb-2'>  <ReactPaginateFixed
                         nextLabel="next >"
                         onPageChange={(event) => {
                             //reactpagination是从0开始所以要+1
                             const newPage = event.selected + 1;
                             // console.log(newPage);
-                            axios.get('http://localhost:8083/product/list?pageNum=' + newPage + '&pageSize=' + itemsPerPage+"&orderBy=sales desc").then(res => {
+                            axios.get('http://localhost:8083/product/list?pageNum=' + newPage + '&pageSize=' + itemsPerPage + "&orderBy=sales desc").then(res => {
                                 //     this.setState({ curPage: newPage, currentItems: res.data.data.list });
                                 setcurPage(newPage);
                                 setcurrentItems(res.data.data.list);

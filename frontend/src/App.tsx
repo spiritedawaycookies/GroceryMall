@@ -12,8 +12,10 @@ import Register from './components/pagemodel/login-registration/Register';
 import NoMatch from './components/pagemodel/NoMatch';
 import ProductDetail from './components/detail/ProductDetail'
 import Discount from './components/pagemodel/deals/Discount'
+import { PropsWithChildren } from 'react';
+const FooterFixed = Footer as unknown as React.FC<PropsWithChildren<any>>
 class App extends React.Component {
-
+  
 
   render() {
     return (
@@ -35,7 +37,7 @@ class App extends React.Component {
             <Route path="*" element={<NoMatch />} />
 
           </Routes>
-          <Footer />
+          <FooterFixed />
 
         </BrowserRouter>
 
