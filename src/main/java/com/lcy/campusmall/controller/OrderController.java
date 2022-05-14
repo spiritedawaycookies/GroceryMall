@@ -3,6 +3,7 @@ package com.lcy.campusmall.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.lcy.campusmall.common.ApiRestResponse;
+import com.lcy.campusmall.common.Constant;
 import com.lcy.campusmall.model.request.CreateOrderReq;
 import com.lcy.campusmall.model.vo.OrderVO;
 import com.lcy.campusmall.service.OrderService;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
+@CrossOrigin(origins = {Constant.FRONTEND_URL,Constant.PUBLIC_FRONTEND_URL})
 @RestController
 public class OrderController {
     @Autowired

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
-@CrossOrigin(origins = Constant.FRONTEND_URL)
+@CrossOrigin(origins = {Constant.FRONTEND_URL,Constant.PUBLIC_FRONTEND_URL})
 @Controller
 public class CategoryController {
     @Autowired

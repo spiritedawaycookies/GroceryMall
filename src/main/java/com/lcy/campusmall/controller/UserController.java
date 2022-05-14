@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@CrossOrigin(origins = Constant.FRONTEND_URL)
-
+@CrossOrigin(origins = {Constant.FRONTEND_URL,Constant.PUBLIC_FRONTEND_URL})
 @Controller
 public class UserController {
     @Autowired

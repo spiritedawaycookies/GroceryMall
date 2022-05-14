@@ -22,11 +22,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.PageInfo;
 
@@ -50,6 +46,7 @@ import com.github.pagehelper.PageInfo;
  总的来说就是，如果你想使用控制器处理完请求之后跳转到画面那么你就使用 @Controller 。而如果你想向画面返回一些内容，
  例如，返回JSON，XML或自定义mediaType内容到页面，那么 @RestController 更适合你
  */
+@CrossOrigin(origins = {Constant.FRONTEND_URL,Constant.PUBLIC_FRONTEND_URL})
 @RestController
 public class ProductAdminController {
     @Autowired

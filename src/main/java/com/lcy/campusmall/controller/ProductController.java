@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 前台商品controller
  */
-@CrossOrigin(origins = Constant.FRONTEND_URL)
+@CrossOrigin(origins = {Constant.FRONTEND_URL,Constant.PUBLIC_FRONTEND_URL})
 @RestController
 public class ProductController {
 

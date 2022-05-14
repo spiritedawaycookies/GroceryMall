@@ -16,6 +16,11 @@ public class Constant {
     public static String FILE_UPLOAD_DIR;
     public static final String BACKEND_URL="http://localhost:8083";
     public static final String FRONTEND_URL="http://localhost:3001";
+    @Value("${file.upload.ip}")
+    static String ip;
+    public static final String PUBLIC_FRONTEND_URL="http://18.144.73.202:3000";
+    public static final String PUBLIC_BACKEND_URL="http://18.144.73.202:8081";
+
     @Value("${file.upload.dir}")//配置文件中写 static变量用普通方式无法注入
     public void setFileUploadDir(String fileUploadDir){
         FILE_UPLOAD_DIR= fileUploadDir;

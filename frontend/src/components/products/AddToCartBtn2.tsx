@@ -49,7 +49,7 @@ const AddToCartBtn:React.FC<BTNProps>=({ pid, productName, price })=> {
     }
     return <>
         <div className="text-center">
-            <button className="btn btn-outline-dark mt-auto" onClick={addToCart} >
+            <button className="btn btn-outline-primary mt-auto" onClick={addToCart} >
                 {t('main.add_cart')}</button></div>
 
     </>;
