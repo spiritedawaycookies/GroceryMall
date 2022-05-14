@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { idText } from 'typescript';
 import { appContext, appSetStateContext } from "../../AppState";
-
+import {useTranslation} from 'react-i18next'
 interface BTNProps {
     pid: number,
     productName:string,
@@ -9,6 +9,7 @@ interface BTNProps {
 }
 
 const AddToCartBtn:React.FC<BTNProps>=({ pid, productName, price })=> {
+    const {t}=useTranslation();
     const value = useContext(appContext)
     const stState = useContext(appSetStateContext);
     let found = value.cart.get(pid);
@@ -49,7 +50,7 @@ const AddToCartBtn:React.FC<BTNProps>=({ pid, productName, price })=> {
     return <>
         <div className="text-center">
             <button className="btn btn-outline-dark mt-auto" onClick={addToCart} >
-                Add to cart</button></div>
+                {t('main.add_cart')}</button></div>
 
     </>;
 }

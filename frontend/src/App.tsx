@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import React from 'react';
 import "bootswatch/dist/minty/bootstrap.min.css";
 import './App.less';
-import {Footer} from './components/footer/Footer';
+import Footer from './components/footer/Footer1';
 import Nav from './components/nav/Nav';
 import Login from './components/pagemodel/login-registration/Login'
 
