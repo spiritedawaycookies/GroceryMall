@@ -25,7 +25,7 @@ const Index: React.FC<Props> = (props: Props) => {
               </Col>
             </Row>
           </div>
-          <IndexPagination itemsPage={8} />
+          <IndexPagination />
           <div className='mb-5'>&nbsp;</div>
         </>
     );

@@ -1,25 +1,27 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React from 'react';
 import ReactPaginate from 'react-paginate';
 import axios from 'axios';
-import urls from '../../../constant.json';
 import { Divider, Spin } from 'antd'
 import IndexItems from "./IndexItems";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { PropsWithChildren } from 'react';
+import { connect } from 'react-redux'
+import { RootState } from '../../../redux/store'
+import { fetchProductStartActionCreator, fetchProductSuccessActionCreator, fetchProductFailActionCreator } from '../../../redux/products/ProductAction'
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
 }
 interface Props {
     itemsPage: number,
 }
-interface State {
-    currentItems: Array<CardProps>,
-    loading: boolean,
-    pageCount: number,
-    curPage: number,
-    itemsPerPage: number,
-    err: null | string
-}
+// interface State {
+//     currentItems: Array<CardProps>,
+//     loading: boolean,
+//     pageCount: number,
+//     curPage: number,
+//     itemsPerPage: number,
+//     err: null | string
+// }
 const ReactPaginateFixed = ReactPaginate as unknown as React.FC<PropsWithChildren<{
     onPageChange: any,
     nextLabel: any,
@@ -40,74 +42,96 @@ const ReactPaginateFixed = ReactPaginate as unknown as React.FC<PropsWithChildre
     activeClassName: any,
 
 }>>
-class IndexPaginationComponent extends React.Component< WithTranslation,State> {
-    constructor(props) {
-        super(props)
-        this.state = {
-            currentItems: [],
-            loading: false,
-            pageCount: 0,
-            curPage: 1,
-            itemsPerPage: props.itemsPage,
-            err: null
-        }
-        this.renderProduct = this.renderProduct.bind(this)
+const mapStateToProps = (state: RootState) => {
+    return {
+        loading: state.products.loading,
+        error: state.products.error,
+        productList: state.products.productList,
+        curPage:state.products.curPage,
+        pageCount:state.products.pageCount
     }
-    componentDidMount() {
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchStart: () => {
+            dispatch(fetchProductStartActionCreator());
+        },
+        fetchSuccess: (data) => {
+            dispatch(fetchProductSuccessActionCreator(data));
+        },
+        fetchFail: (error) => {
+            dispatch(fetchProductFailActionCreator(error));
+        },
+    };
+};
+
+type PropsType = WithTranslation & ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
+
+class IndexPaginationComponent extends React.Component<PropsType> {
+    // constructor(props) {
+    //     super(props)
+    //     this.state = {
+    //         currentItems: [],
+    //         loading: false,
+    //         pageCount: 0,
+    //         curPage: 1,
+    //         itemsPerPage: props.itemsPage,
+    //         err: null
+    //     }
+    //     this.renderProduct = this.renderProduct.bind(this)
+    // }
+    async componentDidMount() {
         // Fetch items from another resources.
-        // console.log(newPage);
-        const fetchData = async () => {
-            try {
-                axios.get('/product/list?pageNum=' + this.state.curPage + '&pageSize=' + this.state.itemsPerPage + "&orderBy=sales desc").then(({ data }) => {
-                    console.log("fetched",data.data.list);
+        this.props.fetchStart()
 
-                    this.setState({loading:false});
-                    // if (loading) {
-                    this.setState({currentItems: data.data.list});
-                    console.log("currentItems",this.state.currentItems);
-
-                    this.setState({pageCount: Math.ceil(data.data.total / this.state.itemsPerPage)});
-                    console.log(this.state.pageCount);
+        try {
+            axios.get('/product/list?pageNum=' + 1 + '&pageSize=' + 8 + "&orderBy=sales desc").then(({ data }) => {
+                console.log("fetched", data.data.list);
+                //action的payload送给reducer 处理
+                this.props.fetchSuccess( data.data.list)
+                console.log("currentItems", this.props.productList);
+                console.log("pageCounr",this.props.pageCount);
+                
+                // this.setState({ pageCount: Math.ceil(data.data.total / 8) });
 
 
-                    console.log(this.state.loading);
-                })
+                console.log("loading",this.props.loading);
+            })
 
 
-            } catch (e: any) {
-                this.setState({err:e.message});
-            }
-
+        } catch (e: any) {
+            this.props.fetchFail(e.message)
         }
-        fetchData();
+
     }
 
 
     renderProduct() {
-        const {t}=this.props;
+        const { t,productList,loading,error } = this.props;
         return (
             <div>
                 <Divider orientation="center" style={{ textAlign: 'center', justifyContent: "center" }} ><h2 style={{ textAlign: 'center' }} className='text-muted center'>{t('main.hot_products')}</h2></Divider>
-                < IndexItems currentItems={this.state.currentItems} />
+                < IndexItems currentItems={this.props.productList} />
                 <div >
-                    {!this.state.err || this.state.err !== "" && <div>Error:{this.state.err}</div>}
+                    {!this.props.error || this.props.error !== "" && <div>Error:{this.props.error}</div>}
                     <div className='container mb-2'>  <ReactPaginateFixed
                         nextLabel="next >"
                         onPageChange={(event) => {
                             //reactpagination是从0开始所以要+1
                             const newPage = event.selected + 1;
                             // console.log(newPage);
-                            axios.get('/product/list?pageNum=' + newPage + '&pageSize=' + this.state.itemsPerPage + "&orderBy=sales desc").then(res => {
+                            axios.get('/product/list?pageNum=' + newPage + '&pageSize=' + 8 + "&orderBy=sales desc").then(res => {
                                 //     this.setState({ curPage: newPage, currentItems: res.data.data.list });
                                 this.setState({ curPage: newPage });
                                 this.setState({ currentItems: res.data.data.list });
-                                console.log("currentItems:" + this.state.currentItems);
+                                console.log("currentItems:" + this.props.productList);
                             });
 
                         }}
                         pageRangeDisplayed={3}
                         marginPagesDisplayed={1}
-                        pageCount={this.state.pageCount}
+                        pageCount={this.props.pageCount}
                         previousLabel="< previous"
                         pageClassName="page-item"
                         pageLinkClassName="page-link"
@@ -129,7 +153,7 @@ class IndexPaginationComponent extends React.Component< WithTranslation,State> {
 
 
     render() {
-        return (this.state.loading || this.state.pageCount == 0 ? <div><Spin /></div>:<div>{this.renderProduct()}</div> )
+        return (this.props.loading || this.props.pageCount == 0 ? <div><Spin /></div> : <div>{this.renderProduct()}</div>)
     }
 
 
@@ -139,4 +163,4 @@ class IndexPaginationComponent extends React.Component< WithTranslation,State> {
 
 
 
-export const IndexPagination=withTranslation()(IndexPaginationComponent);
+export const IndexPagination = connect(mapStateToProps, mapDispatchToProps)(withTranslation()(IndexPaginationComponent));
