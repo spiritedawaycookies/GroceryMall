@@ -1,37 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaPaperPlane } from 'react-icons/fa'
 import { Dropdown, Menu } from 'antd'
 import { GlobalOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom';
-import { useTranslation} from 'react-i18next'
+import store from '../../redux/store'
+import { withTranslation, WithTranslation } from 'react-i18next'
 import { LanguageState } from '../../redux/language/languageReducer'
 import {
     addLanguageActionCreator,
     changeLanguageActionCreator,
 } from "../../redux/language/languageActions"
-import {useDispatch} from 'react-redux'
-import {useSelector} from '../../redux/hooks'
-
 interface State extends LanguageState { }
 
-const Footer=()=> {
-  
-    const language = useSelector((state) => state.language);
-    const languageList = useSelector((state) => state.languageList);
-    const dispatch = useDispatch();
+class FooterComponent extends React.Component<WithTranslation, State> {
+    constructor(props) {
+        super(props);
+        const storeState = store.getState();
+        this.state = {
+            language: storeState.language.language,
+            languageList: storeState.language.languageList,
+        };
+        store.subscribe(() => {
+            const storeState = store.getState();
+            this.setState({
+                language: storeState.language.language,
+                languageList: storeState.language.languageList,
+            });
+            console.log('changed,subscribe', this.state.language);
 
-   const menuClickHandler = (e) => {
-    console.log(e);
-    if (e.key === "new") {
-      // 处理新语言添加action
-      dispatch(addLanguageActionCreator("新语言", "new_lang"));
-    } else {
-      dispatch(changeLanguageActionCreator(e.key));
+        });
     }
+
+    // const storeState = store.getState();
+    // const [language, setLang] = useState(storeState.language);
+    // const [this.state.languageList, setLangList] = useState(storeState.languageList);
+
+    // useEffect(()=>{
+    //     store.subscribe(()=>{
+    //       const storeState=store.getState(); 
+    //       setLang(storeState.language);
+    //       console.log(language);
+
+    //       setLangList(storeState.languageList);  
+
+    //     }
+
+
+    //     )
+    // },[])
+    handleStoreChange = () => {
+        const storeState = store.getState();
+        this.setState({
+            language: storeState.language.language,
+            languageList: storeState.language.languageList,
+        });
+        console.log('changed', this.state.language);
+
+    };
+    menuClickHandler = (e) => {
+        console.log(e);
+        if (e.key === "new") {
+            // 处理新语言添加action
+            const action = addLanguageActionCreator("新语言", "new_lang")
+            store.dispatch(action);
+        } else {
+            const action = changeLanguageActionCreator(e.key)
+            store.dispatch(action);
+        }
     }
 
-
-        const { t } = useTranslation();
+    render() {
+        const { t } = this.props;
         console.log("render", t);
 
         return (
@@ -46,8 +85,8 @@ const Footer=()=> {
                             <Dropdown.Button
                                 style={{ marginLeft: 0 }}
                                 overlay={
-                                    <Menu onClick={menuClickHandler}>
-                                        {languageList.map(l => {
+                                    <Menu onClick={this.menuClickHandler}>
+                                        {this.state.languageList.map(l => {
                                             return <Menu.Item key={l.code}>{l.name}</Menu.Item>
                                         })}
 
@@ -55,7 +94,7 @@ const Footer=()=> {
                                 }
                                 icon={<GlobalOutlined />}
                             >
-                                {language === 'zh' ? '中文' : 'English'}
+                                {this.state.language === 'zh' ? '中文' : 'English'}
                             </Dropdown.Button>
                         </div>
                         <div className="col-lg-2 col-md-6" style={{ position: 'relative', top: '10px' }}>
@@ -124,6 +163,6 @@ const Footer=()=> {
         );
     }
 
+}
 
-
-export default Footer;
+export const Footer = withTranslation()(FooterComponent);

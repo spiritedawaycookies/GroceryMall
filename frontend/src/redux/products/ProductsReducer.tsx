@@ -1,10 +1,10 @@
-interface RecommendProductsState{
+interface ProductsState{
     productList:any[],
     loading:boolean,
     error:string|null,
 }
 
-const defaultState:RecommendProductsState={
+const defaultState:ProductsState={
     loading:true,
     error:null,
     productList:[]
