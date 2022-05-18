@@ -8,6 +8,7 @@ import { Link,Outlet,useNavigate,useLocation  } from 'react-router-dom';
 // import Login from '../main/Login'
 // import CategoryService from '../../services/CategoryService'
 import {useTranslation} from 'react-i18next'
+import axios from "axios";
 interface Props {
   
 }
@@ -35,9 +36,8 @@ const Nav: React.FC<Props> = (props: Props) => {
         //每次ui渲染或者状态改变useEffect都会执行（默认），第二个参数是调用时机是一个状态列表（比如state）,如果状态列表变化就会执行
         //如果是一个[]就是类似componentDidMount在挂载组件时调用一次 此时调用api可以
         //不可以不传第二个，因为会无限调用
-        fetch("http://localhost:8083/category/list")
-            .then(response => response.json())
-            .then(data => {
+        axios.get("/category/list")
+            .then(({data}) => {
                 setCategories(data.data.map((d: any) => d.name));
                 setGetCategoriesSuccess(true);
                 if (getCategoriesSuccess)
