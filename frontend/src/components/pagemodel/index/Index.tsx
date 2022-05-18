@@ -4,7 +4,7 @@ import Header from '../../nav/Header';
 import { Row, Col, Typography } from "antd";
 import SideMenu from '../../sideMenu/SideMenu';
 import Carousel from '../../carousel/Carousel';
-import IndexPagination from '../../pagemodel/index/IndexPagination';
+import {IndexPagination} from '../../pagemodel/index/IndexPagination.class';
 import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:8083';
