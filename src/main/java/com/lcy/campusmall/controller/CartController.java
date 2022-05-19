@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * 描述：     购物车Controller
  */
+@CrossOrigin(origins = {Constant.FRONTEND_URL,Constant.PUBLIC_FRONTEND_URL})
 @RestController//json格式的必须是restcontroller
 @RequestMapping("/cart")
 public class CartController {

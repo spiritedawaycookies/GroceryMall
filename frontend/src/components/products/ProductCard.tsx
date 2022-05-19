@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { appContext, appSetStateContext } from "../../AppState";
 import { Link } from 'react-router-dom'
-import AddToCartBtn from './AddToCartBtn';
+import AddToCartBtn from './AddToCartBtn2';
 import{useTranslation} from 'react-i18next'
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
@@ -29,7 +29,7 @@ const ProductCard: React.FC<CardProps> = (props: CardProps) => {
                             <a>
                                 <h5 style={{ fontSize: "100%" }} className="fw-bolder text-dark card-title">{props.name}</h5>
                                 {/* <!-- Product price--> */}</a></Link>
-                        <span style={{ fontSize: "70%" }} className="text-muted text-decoration-line-through"> {originprice}</span>  <span className='text-dark '>${props.price / 100}</span>
+                        <span style={{ fontSize: "100%" }} className="text-muted text-decoration-line-through card-subtitle mb-2"> {originprice}</span>  <span style={{ fontSize: "180%" }} className='text-primary card-subtitle mb-2'>${props.price / 100}</span>
                     </div>
                 </div>
                 {/* <!-- Product actions--> */}

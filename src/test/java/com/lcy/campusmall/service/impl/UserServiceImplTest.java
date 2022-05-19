@@ -16,8 +16,8 @@ class UserServiceImplTest {
     void register() {
     }
 
-    @Test
-    void login() {
-        userService.login("lcy","aaaaaaaaa");
-    }
+//    @Test
+//    void login() {
+//        userService.login("lcy","aaaaaaaaa");
+//    }
 }
