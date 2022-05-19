@@ -7,7 +7,7 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import { PropsWithChildren } from 'react';
 import { connect } from 'react-redux'
 import { RootState } from '../../../redux/store'
-import { fetchProductStartActionCreator, fetchProductSuccessActionCreator, fetchProductFailActionCreator } from '../../../redux/products/ProductAction'
+import { giveMeDataActionCreator} from '../../../redux/products/ProductAction'
 interface CardProps {
     id: number, name: string, image: string, price: number, sales: number, isSale: boolean, quantity: number
 }
@@ -54,56 +54,20 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchStart: () => {
-            dispatch(fetchProductStartActionCreator());
-        },
-        fetchSuccess: (data) => {
-            dispatch(fetchProductSuccessActionCreator(data));
-        },
-        fetchFail: (error) => {
-            dispatch(fetchProductFailActionCreator(error));
-        },
+        giveMeData:()=>{
+            dispatch(giveMeDataActionCreator())
+        }
     };
 };
 
 type PropsType = WithTranslation & ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
 class IndexPaginationComponent extends React.Component<PropsType> {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         currentItems: [],
-    //         loading: false,
-    //         pageCount: 0,
-    //         curPage: 1,
-    //         itemsPerPage: props.itemsPage,
-    //         err: null
-    //     }
-    //     this.renderProduct = this.renderProduct.bind(this)
-    // }
-    async componentDidMount() {
+
+     componentDidMount() {
+        this.props.giveMeData();
         // Fetch items from another resources.
-        this.props.fetchStart()
-
-        try {
-            axios.get('/product/list?pageNum=' + 1 + '&pageSize=' + 8 + "&orderBy=sales desc").then(({ data }) => {
-                console.log("fetched", data.data.list);
-                //action的payload送给reducer 处理
-                this.props.fetchSuccess( data.data.list)
-                console.log("currentItems", this.props.productList);
-                console.log("pageCounr",this.props.pageCount);
-                
-                // this.setState({ pageCount: Math.ceil(data.data.total / 8) });
-
-
-                console.log("loading",this.props.loading);
-            })
-
-
-        } catch (e: any) {
-            this.props.fetchFail(e.message)
-        }
-
+        
     }
 
 

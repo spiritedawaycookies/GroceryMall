@@ -1,3 +1,7 @@
+import {ThunkAction} from 'redux-thunk'
+import {RootState} from '../store'
+import axios from 'axios' 
+
 export const FETCH_PRODUCTS_START =
     "FETCH_PRODUCTS_START"; // 正在调用推荐信息api
 export const FETCH_PRODUCTS_SUCCESS =
@@ -42,4 +46,27 @@ export const fetchProductFailActionCreator = (error): FetchProductFailAction => 
         type: FETCH_PRODUCTS_FAIL,
         payload: error
     }
+}
+
+export const giveMeDataActionCreator=():ThunkAction<void,RootState,undefined,ProductAction>=>
+async (dispatch,getState)=>{
+    dispatch(fetchProductStartActionCreator())
+
+    try {
+     const{data}= await axios.get('/product/list?pageNum=' + 1 + '&pageSize=' + 8 + "&orderBy=sales desc");
+        console.log("fetched", data.data.list);
+        //action的参数是payload,送给reducer 处理
+        dispatch(fetchProductSuccessActionCreator(data.data.list))
+
+        console.log("middleware dispatched", data.data.list);
+        
+        // this.setState({ pageCount: Math.ceil(data.data.total / 8) });
+
+
+
+    } catch (e:any) {
+        dispatch(fetchProductFailActionCreator(e.message))
+
+    }
+
 }
